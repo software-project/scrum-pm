@@ -1,3 +1,14 @@
-= sprints
+== Scrum PM v. very beta
 
-Description goes here
+Scrum PM is a plugin for Redmine for Scrum project management. Redmine Version class becomes a sprint and issue becomes task. 
+Most actions support drag and drop, eg. dashboard where you can change status of your task simply by draging it to another column.
+Current version is under development (help needed). There are issues with reassinging user stories to sprints (task do not change 
+assignment). This bug is connected to another thing: functions added to Version and Issue during plugin init are deleted after first
+run or so.
+Next releases will hopefully remove mentioned bug and add some more interesting stuff like:
+
+# Support for uml driagram generators railroad(Rails) and umlgraph (JAVA).
+# One click documentation generation (rdoc and javadoc)
+# Continous integration with cruisecontrol
+# Burndown charts
+# Velocity planing
