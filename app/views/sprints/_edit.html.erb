@@ -1,0 +1,25 @@
+<% labelled_tabular_remote_form_for :sprint, @sprint,
+  :url => {:controller => "sprints", :action => "update", :project_id => @project.identifier},
+  :html => {:method => :post, :multipart => true, :id => 'sprint-form'} do |f| %>
+
+    <%= render(:partial => "sprints/form", :locals => {:f => f}) %>
+    <%= f.submit "Uaktualnij", :onclick => 'Modalbox.hide()' %>
+
+  <%#*<p>%>
+    <%#= f.label :sprint_no %><br />
+    <%#= f.spinbox_field :sprint_no %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :target %><br />
+    <%#= f.text_field :target %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label 'Początek sprintu' %><br />
+    <%#= f.text_field :start_date, :size => 10 %>
+<%#= calendar_for('sprint_start_date') %>
+  <%#*</p>%>
+  <%#*<p align="right">%>
+      <%#= f.submit "Uaktualnij", :onclick => 'Modalbox.hide()' %>
+  <%#*</p>%>
+  
+<% end %>

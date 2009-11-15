@@ -1,0 +1,11 @@
+<div>
+  <p>
+    Dokumentacja:
+    <%= link_to image_tag("/plugin_assets/redmine_sprints/images/api.png", :title => "API projektu"),
+          {:controller => "documentations", :action => :show_api, :project_id => project.identifier} %>
+  </p>
+  <p>
+    <%= lightbox_link_to image_tag("/plugin_assets/redmine_sprints/images/model.png")+ "Diagram modelu", "/projects/#{project.identifier}/chart/models.png" %><br/>
+    <%= lightbox_link_to image_tag("/plugin_assets/redmine_sprints/images/controller.png")+ "Diagram kontrolerów", "/projects/#{project.identifier}/chart/controllers.png" %>
+  </p>
+</div>

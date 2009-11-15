@@ -1,0 +1,24 @@
+<p>
+  <b>Nazwa:</b>
+  <%=h @user_story.name %>
+</p>
+
+<p>
+  <b>Opis:</b>
+  <%= @user_story.description %>
+</p>
+
+<p>
+  <b>Iteracja: </b>
+  <%=h @user_story.sprint_id %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%=h @project.name %>
+</p>
+
+
+
+<%= link_to_object(@user_story, "edit", "edit") %> |
+<%= link_to 'Back', :back %>

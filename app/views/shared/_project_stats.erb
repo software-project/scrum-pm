@@ -1,0 +1,38 @@
+<div class="sprints_fieldset">
+  <div class="sprints_header">
+    <%= link_to_function("<h3>Statystyki</h3>", "Effect.toggle('stat_tab', 'blind');") %>
+  </div>
+  <div id="stat_tab" style="padding: 0; margin:0;">
+    <table style="width: 100%;">
+      <tr>
+        <th>Suma punktów</th>
+        <th>Oczekujące</th>
+        <th>W trakcie wykonywania</th>
+        <th>Wykonane punkty</th>
+        <th>Procent wykonanych</th>
+      </tr>
+      <tr style="text-align: right;">
+          <% data = load_project_stats(project) %>
+          <td class="sprint_stats_total" >
+            <img src="/plugin_assets/redmine_sprints/images/sum.png" alt="Suma" style=" vertical-align: bottom;"/>
+            <%= data[:all_points] %>
+          </td>
+          <td>
+            <img src="/plugin_assets/redmine_sprints/images/pending.png" alt="Oczekujące" style=" vertical-align: bottom;" />
+            <%= data[:pending] %>
+          </td>
+          <td>
+            <img src="/plugin_assets/redmine_sprints/images/inprogress.png" alt="W trakcie wykonywania" style=" vertical-align: bottom;" />
+            <%= data[:in_progress] %>
+          </td>
+          <td>
+            <img src="/plugin_assets/redmine_sprints/images/done.png" alt="Wykonane" style=" vertical-align: bottom;" />
+            <%= data[:done] %>
+          </td>
+          <td class="sprint_stats_done">
+            <%= sprintf("%.2f",data[:percent_done]) %>%
+          </td>
+      </tr>
+    </table>
+  </div>
+</div>

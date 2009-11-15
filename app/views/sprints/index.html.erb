@@ -1,0 +1,47 @@
+
+<div id="backlog-right">
+  <div id="backlog-left">
+    <div id="bl-left">
+      <%#= render(:partial => "shared/project_stats", :locals => {:project => @project}) %>
+      <%= render(:partial => "sprints/product_backlog") %>
+      <%= render(:partial => "milestones/milestones") %>
+    </div>
+    <div id="bl-right">
+      <div class="sprints_fieldset">
+        <div class="sprints_header">
+          <h3>Sprinty</h3>
+        </div> 
+
+        <%= link_to image_tag("/plugin_assets/redmine_sprints/images/add.png")+'Nowy Sprint', {:action => :new, :project_id => @project.identifier },
+          {:id => "new_sprint", :title => "Nowy sprint",
+          :onclick => "Modalbox.show(this.href, {title: this.title, width: 700}); return false;"} %>
+        <div id="sprints_fieldset_main">
+          <% for sprint in @sprints %>
+            <%= render(:partial => "sprints/sprint", :locals => {:sprint => sprint}) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# content_for :sidebar do %>
+  <%#= render(:partial => "shared/stats_form", :locals => {:project => @project}) %>
+  <%#= render(:partial => "documentations/documentation", :locals => {:project => @project}) %>
+<%# end %>
+<% content_for :header_tags do %>
+  <%= javascript_include_tag 'modalbox', :plugin => 'redmine_sprints' %>
+  <%= stylesheet_link_tag 'modalbox', :plugin => 'redmine_sprints'  %>
+  <%= stylesheet_link_tag 'tooltip', :plugin => 'redmine_sprints'  %>
+  <%= stylesheet_link_tag 'tablesort', :plugin => 'redmine_sprints'  %>
+  <%= javascript_include_tag 'fastinit', :plugin => 'redmine_sprints' %>
+  <%= javascript_include_tag 'tablesort', :plugin => 'redmine_sprints' %>
+  <%= stylesheet_link_tag 'scrum', :plugin => 'redmine_sprints' %>
+  <%= stylesheet_link_tag 'spinbutton', :plugin => 'redmine_sprints' %>
+  <%= javascript_include_tag 'spinbutton', :plugin => 'redmine_sprints' %>
+  <%= stylesheet_link_tag 'lightbox'%>
+  <%= javascript_include_tag('calendar/calendar') %>
+  <%= javascript_include_tag("calendar/lang/calendar-#{current_language}.js") %>
+  <%= javascript_include_tag('calendar/calendar-setup') %>
+  <%= stylesheet_link_tag('calendar') %>
+<% end %>

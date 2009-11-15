@@ -1,0 +1,77 @@
+.bubbleInfo {
+    position: relative;
+    top: 150px;
+    left: 100px;
+    width: 500px;
+}
+.trigger {
+    position: absolute;
+}
+
+/* Bubble pop-up */
+
+.popup {
+    position: absolute;
+    z-index: 50;
+    border-collapse: collapse;
+    display: none;
+}
+
+.popupshow{
+    position: absolute;
+    z-index: 50;
+    border-collapse: collapse;
+    top: -120px;
+    left: -33px;
+    display: block;    
+}
+
+.popup td.corner {
+        height: 19px;
+        width: 14px;
+        background: no-repeat;
+}
+
+.popup td#topleft { background-image: url(/images/tooltip/top_left.png); }
+.popup td.top { background: url(/images/tooltip/top.png) repeat-x ;}
+.popup td#topright { background-image: url(/images/tooltip/top_right.png); }
+.popup td.left { background-image: url(/images/tooltip/left.png); }
+.popup td.right { background-image: url(/images/tooltip/right.png); }
+.popup td#bottomleft { background-image: url(/images/tooltip/bottom_left.png); }
+.popup td.bottom { background: url(/images/tooltip/bottom.png)  repeat-x; text-align: center;}
+.popup td.bottom img { display: block; margin: 0 auto; }
+.popup td#bottomright { background-image: url(/images/tooltip/bottom_right.png); }
+
+.popup-contents{
+    background: white;
+    padding: 0;
+    margin: -3px;
+}
+
+.popup table.popup-contents {
+        font-size: 12px;
+        line-height: 1.2em;
+        background-color: white;
+        color: #666;
+        font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+        }
+
+table.popup-contents th {
+        text-align: right;
+        text-transform: lowercase;
+        }
+
+table.popup-contents td {
+        text-align: left;
+        }
+
+tr#release-notes th {
+        text-align: left;
+        text-indent: -9999px;
+        background: url(/images/tooltip/starburst.gif) no-repeat top right;
+        height: 17px;
+        }
+
+tr#release-notes td a {
+        color: #333;
+}

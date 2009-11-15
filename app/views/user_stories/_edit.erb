@@ -1,0 +1,35 @@
+<div id="new_us_form_cont">
+<div id="new_us_form">
+
+<% remote_form_for @user_story, :url => {:controller => 'user_stories', :action => "update", :project_id => @project.identifier},:html => { :method => :post} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nazwa %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :opis %><br />
+    <p><%= f.text_area :description,
+                       :cols => 60,
+                       :rows => (@user_story.description.blank? ? 10 : [[10, @user_story.description.length / 50].max, 100].min),
+                       :accesskey => accesskey(:edit),
+                       :class => 'wiki-edit' %></p>
+  </p>
+  <p>
+    <%= f.label :priorytet %> <br/>
+    <%= f.spinbox_field :priority, :value => 1, :align => "right" %>
+  </p>
+  <p>
+    <%= f.label :estymacja %> <br/>
+    <%= f.collection_select( :time_estimate_id, TimeEstimate.find(:all), :id, :estimation) %>
+  </p>
+  <%= f.hidden_field :version_id %>
+  <p>
+    <%= f.submit "Uaktualnij", :onclick => 'Modalbox.hide()' %>
+  </p>
+<% end %>
+
+<%= wikitoolbar_for 'user_story_description' %>
+</div>
+</div>

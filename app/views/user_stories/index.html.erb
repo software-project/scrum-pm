@@ -1,0 +1,26 @@
+<h1>Historie użytkowników</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Sprint</th>
+    <th>Project</th>
+  </tr>
+
+<% for user_story in @user_stories %>
+  <tr>
+    <td><%=h user_story.name %></td>
+    <td><%= user_story.description %></td>
+    <td><%=h user_story.sprint_id %></td>
+    <td><%=h user_story.project_id %></td>
+    <td><%= link_to 'Show', user_story %></td>
+    <td><%= link_to 'Edit', edit_user_story_path(user_story) %></td>
+    <td><%= link_to 'Destroy', user_story, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user_story', new_user_story_path %>

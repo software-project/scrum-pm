@@ -1,0 +1,24 @@
+/* 
+    Document   : spinbutton
+    Created on : 2009-03-26, 16:44:22
+    Author     : Martin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+input.spin-button {
+  padding-right:20px;
+  width:35px;
+  background-color:white;
+  background-repeat:no-repeat;
+  background-position:100% 0%;
+  background-image:url(/plugin_assets/redmine_sprints/images/spinbtn_updn.gif);
+}
+
+input.spin-button.up {
+  cursor:pointer;
+  background-position:100% -18px;
+}
+input.spin-button.down {
+  cursor:pointer;
+  background-position:100% -36px;
+}

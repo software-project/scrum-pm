@@ -1,0 +1,35 @@
+<h1>Nowy sprint</h1>
+
+<% form_for @sprint, :url => {:action => "create", :project_id => @project.identifier} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :sprint_no %><br />
+    <table class="spinner_table" cellpadding="0" cellspacing="0" border="0"><tr><td rowspan="2">
+    <%= f.text_field :sprint_no, :class =>"numerical" %>
+    </td><td><input type="button" value=" /\ " onclick="this.form.sprint_sprint_no.value++;" style="font-size:6px;margin:0;padding:0;width:20px;height:14px;" ></td>
+    </tr><tr><td><input type=button value=" \/ " onclick="this.form.sprint_sprint_no.value--;" style="font-size:6px;margin:0;padding:0;width:20px;height:14px;" ></td>
+    </tr></table>
+    
+  </p>
+  <p>
+    <%= f.label 'Początek sprintu' %><br />
+    <%= f.date_select :start_date, :order => [:day, :month, :year] %>
+  </p>
+  <p>
+    <%= f.label 'Czas trwania' %><br />
+    <table class="spinner_table" cellpadding="0" cellspacing="0" border="0"><tr><td rowspan="2">
+    <%= f.text_field :duration, :class =>"numerical" %>
+    </td><td><input type="button" value=" /\ " onclick="this.form.sprint_duration.value++;" style="font-size:6px;margin:0;padding:0;width:20px;height:14px;" ></td>
+    </tr><tr><td><input type=button value=" \/ " onclick="this.form.sprint_duration.value--;" style="font-size:6px;margin:0;padding:0;width:20px;height:14px;" ></td>
+    </tr></table>
+  </p>
+  <p>
+    <%= f.label :cel_sprintu %><br />
+    <%= f.text_field :target %>
+  </p>
+  <p>
+    <%= f.submit "Dodaj" %>
+  </p>
+<% end %>
+

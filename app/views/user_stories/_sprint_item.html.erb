@@ -1,0 +1,54 @@
+
+<tr class="<%= classify( count )  %>" id="tab_us_<%= user_story.id %>" >
+  <td style="width: 30px;"><div class="tab_sprint_user_story">#<%= user_story.us_number %></div></td>
+  <td class="tab_sprint_name">
+    <div class="us_contener">
+      <div class="us" id="<%= "us_#{user_story.id}" %>" style="cursor:move"><%=h user_story.name %></div>
+      <%#*Start popup content%>
+      <table id="<%= "dpop_#{user_story.id}" %>" class="popup" cellpadding="0" cellspacing="0">
+        <tr><td id="topleft" class="corner"></td><td class="top"></td><td id="topright" class="corner"></td></tr>
+        <tr><td class="left"></td>
+          <td>
+            <div class="popup-contents">
+              <table>
+                <tr>
+                  <th>ID</th>
+                  <td><div class="tab_sprint_user_story">#<%= user_story.us_number %></div></td>
+                </tr>
+                <tr>
+                  <th>Nazwa</th>
+                  <td><%=h user_story.name %></td>
+                </tr>
+                <tr>
+                  <th>Opis</th>
+                  <td align="justify"><%= user_story.description %></td>
+                </tr>
+              </table>
+            </div>
+          </td><td class="right"></td>
+        </tr>
+        <tr><td class="corner" id="bottomleft"></td><td class="bottom"></td><td id="bottomright" class="corner"></td></tr>
+      </table>
+      <%#*End popup%>
+    </div>
+  </td>
+  <td class="tab_sprint_status">
+  <% if us_done?(user_story) %>
+    <%= image_tag("/plugin_assets/redmine_sprints/images/done.png", :class => "middle") %>
+  <% else %>
+    <%= image_tag("/plugin_assets/redmine_sprints/images/time.png", :class => "middle") %>
+  <% end %>
+  <%= user_story.time_estimate.estimation -%></td>
+  <td class="tab_sprint_links">
+    <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_edit.png"),
+      {:controller => :user_stories, :action => :edit, :project_id => @project, :id => user_story.id},
+      {:id => "edit_us", :title => "Edycja historii użytkownika", :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
+    %>
+    <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete')),
+      :url => {:controller => :user_stories, :action => :destroy, :project_id => @project, :id => user_story.id},
+      :confirm => 'Are you sure?'
+    %>
+  </td>
+</tr>
+
+<%= draggable_element "us_#{user_story.id}".to_sym, :revert => true %>

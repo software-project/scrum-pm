@@ -1,0 +1,43 @@
+<p>
+  <b>User story:</b>
+  <%=h @diagram.user_story_id %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%=h @diagram.project_id %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%=h @diagram.content_type %>
+</p>
+
+<p>
+  <b>Filename:</b>
+  <%=h @diagram.filename %>
+</p>
+
+<p>
+  <b>Thumbnail:</b>
+  <%=h @diagram.thumbnail %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%=h @diagram.size %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%=h @diagram.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%=h @diagram.height %>
+</p>
+
+
+<%= link_to 'Edit', edit_diagram_path(@diagram) %> |
+<%= link_to 'Back', diagrams_path %>

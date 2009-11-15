@@ -1,0 +1,22 @@
+<div id="new_us_form_cont">
+<div id="new_us_form">
+
+<% remote_form_for @milestone, :url => {:controller => 'milestones', :action => "create", :project_id => @project.identifier},:html => { :method => :put} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :cel %><br />
+    <%= f.text_field :target %>
+  </p>
+  <p>
+    <%= f.label 'Deadline' %><br />
+    <%= f.text_field :deadline, :size => 10 %><%= calendar_for('milestone_deadline') %>
+  </p>
+  <p>
+    <%= f.submit "Dodaj", :onclick => 'Modalbox.hide()' %>
+  </p>
+<% end %>
+
+<%= wikitoolbar_for 'user_story_description' %>
+</div>
+</div>

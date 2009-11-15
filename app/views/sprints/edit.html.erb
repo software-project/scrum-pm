@@ -1,0 +1,18 @@
+<h1>Edytowanie sprintu</h1>
+
+<% form_for( :sprint, @sprint, :url => {:action => 'update', :id => @sprint.id , :project_id => @project.identifier }, :method => :post) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :sprint_no %><br />
+    <%= f.text_field :sprint_no %>
+  </p>
+  <p>
+    <%= f.label :target %><br />
+    <%= f.text_field :target %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+

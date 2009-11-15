@@ -1,0 +1,57 @@
+<div id="new_sprint_form_cont">
+<div id="new_sprint_form">
+<% labelled_tabular_remote_form_for :sprint, @sprint,
+  :url => {:controller => "sprints", :action => "create", :project_id => @project.identifier},
+  :html => {:method => :post, :multipart => true, :id => 'sprint-form'} do |f| %>
+
+    <%= render(:partial => "sprints/form", :locals => {:f => f}) %>
+    <%= f.submit "Dodaj", :onclick => 'Modalbox.hide()' %>
+
+<%#*<table>%>
+  <%#*<tr>%>
+    <%#*<td>%>
+      <%#= f.label :sprint_no %>
+    <%#*</td>%>
+    <%#*<td>%>
+      <%#= f.spinbox_field :sprint_no %>
+    <%#*</td>%>
+  <%#*</tr>%>
+
+  <%#*<tr>%>
+    <%#*<td>%>
+      <%#= f.label 'Początek sprintu' %>
+    <%#*</td>%>
+    <%#*<td>%>
+      <%#= f.text_field :start_date, :size => 10 %>
+      <%#= calendar_for('sprint_start_date') %>
+    <%#*</td>%>
+  <%#*</tr>%>
+
+  <%#*<tr>%>
+    <%#*<td>%>
+      <%#= f.label 'Czas trwania' %>
+    <%#*</td>%>
+    <%#*<td>%>
+      <%#= f.spinbox_field :duration %>
+    <%#*</td>%>
+  <%#*</tr>%>
+
+  <%#*<tr>%>
+    <%#*<td>%>
+      <%#= f.label :cel_sprintu %>
+    <%#*</td>%>
+    <%#*<td>%>
+      <%#= f.text_field :target %>
+    <%#*</td>%>
+  <%#*</tr>%>
+  <%#*<tr>%>
+    <%#*<td></td>%>
+    <%#*<td align="right">%>
+    <%#= f.submit "Dodaj", :onclick => 'Modalbox.hide()' %>
+    <%#*</td>%>
+  <%#*</tr>%>
+<%#*</table>%>
+ 
+<% end %>
+</div>
+</div>

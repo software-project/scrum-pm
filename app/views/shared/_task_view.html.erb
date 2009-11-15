@@ -1,0 +1,42 @@
+<div id="<%= "task_wrap_#{task.id.to_s}" %>">
+<div class="us_task" id="<%= "task_#{task.id}" %>">
+<div class="<%= "the_task_#{task.status_id}" %>" >
+<table>
+  <tr>
+    <td>
+      <% if task.status_id > 1 %>
+        <%#= link_to_remote "<", :controller => 'issue_sprints', :action => 'status_change', :project_id => @project.identifier, :task_id => task.id, :status_id => (task.status_id-1), :user_story_id => task.user_story_id %>
+        <%#*"/projects/#{@project.identifier}/tasks/#{task.id}/status_change/#{task.status_id-1}" %>
+      <% end %>
+    </td>
+    <td></td>
+    <td class="task_center" colspan="2"><%= task.subject %></td>
+    <td class="task_right">
+      <% if task.status_id < 3 %>
+        <%#= link_to_remote ">", :controller => 'issue_sprints', :action => 'status_change', :project_id => @project.identifier, :task_id => task.id, :status_id => (task.status_id+1), :user_story_id => task.user_story_id %>
+        <%#= link_to ">", "/projects/#{@project.identifier}/tasks/#{task.id}/status_change/#{task.status_id+1}" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="6">
+      <div class="task_description">
+        <%= task.description %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <p><%= image_tag("/plugin_assets/redmine_sprints/images/user.png", :class => "middle") -%><b><%= User.find(task.assigned_to_id).login unless task.assigned_to_id.nil? -%></b></p>
+    </td>
+    <td class="tab_us_links" colspan="4">
+      <%#= link_to_object(task, "edit", "task_edit") %>
+      <%#= link_to_object(task, "destroy", "task_delete") %>
+    </td>
+    <td></td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+<%= draggable_element "task_#{task.id}".to_sym, :ghosting =>  false %>

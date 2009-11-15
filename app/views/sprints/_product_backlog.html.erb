@@ -1,0 +1,48 @@
+<div class="sprints_fieldset">
+  <div class="sprints_header">
+
+    <%= link_to_function("<h3>Backlog</h3>", "Effect.toggle('sprint_0_c', 'blind');") %>
+  </div>
+
+  <div class="backlog_sprint" id="sprint_0_c">
+  <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ "Nowa historia użytkownika",
+    {:controller => 'user_stories',:action => 'new', :project_id => @project},
+    {:id => "new_us", :title => "Nowa historia użytkownika",
+    :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
+  %>
+  <table cellspacing=0 cellpadding=0 id="sprint_0" class="sprint_0 sortable">
+    <tr>
+      <th class="sortfirstdec">ID</th>
+      <th>Historia użytkownika</th>
+      <th class="tab_backlog_header">Priorytet</th>
+      <th class="tab_backlog_header">Estymacja</th>
+      <th class="tab_sprint_links nosort">Akcje</th>
+    </tr>
+    <% unasssigned_us = UserStory.find(:all, :conditions => "version_id is null and project_id = #{@project.id}", :order => "priority ASC")  %>
+
+    <% if unasssigned_us.size > 0 %>
+      <% count = 0 %>
+      <% for user_story in unasssigned_us %>
+
+        <%= render(:partial => "user_stories/backlog_item", :locals => {:user_story => user_story, :count => count}) %>
+
+        <% count = 1 - count %>
+      <% end %>
+    <% else %>
+      <tr id="no_US_0">
+        <td class="no_US" id="sprint_0_empty" colspan="5">
+          <p>Wszystkie historie użytkowników zostały przydzielone</p>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= drop_receiving_element("sprint_0",
+    :accept => "us",
+    :before => visual_effect(:highlight, "sprint_0"),
+    :success => "$('tab_us_' + element.id.split('_').last()).remove();",
+    :hoverclass => 'hover',
+    :with   => "'us=' + (element.id.split('_').last())",
+    :url    => {:action=>:assign_us, :sprint => 0, :project_id => @project }
+  )%>
+  </div>
+</div>

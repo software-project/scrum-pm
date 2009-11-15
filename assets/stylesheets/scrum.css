@@ -1,0 +1,499 @@
+/* 
+    Document   : scrum
+    Created on : 2009-05-05, 16:42:10
+    Author     : Martin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+.us{
+    
+}
+
+.us_contener{
+    position: relative;
+}
+
+.sprint_header{
+    background: #9ca5fd;
+    margin: 0;
+    padding: 3px;
+}
+
+.sprint_header h3,.sprint_header p {
+    padding: 0;
+    margin: 0;
+    display: inline;
+    font-weight: bold;
+}
+
+.sprint_header img{
+    vertical-align: text-top;
+}
+
+.sprint_header p{
+    color: white;
+}
+
+.sprints_fieldset{
+    border: 1px solid #48487b;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.sprints_fieldset td{
+    padding: 2px;
+    margin: 0;
+}
+
+.sprints_header{
+    background-color: #48487b;
+    margin-bottom: -10px;
+}
+
+.sprints_header h3{
+    padding: 2px 5px 2px 5px;
+    color: white;
+}
+
+.sprint_fieldset{
+    border: 1px solid #9ca5fd;
+    background-color: #d9e8f1;
+    color: #48487b;    
+    padding:0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.sprint_fieldset a{ 
+    color: #48487b;
+}
+
+.right_top_float{
+    background-color: white;
+    color: #1a659b;
+}
+
+.right_top_float a{
+    color: #1a659b;
+}
+
+.right_top_float img{
+    vertical-align: text-top;
+}
+
+.sprint_head_tab_c1{
+    width: 50%;
+    text-align: left;
+}
+
+.sprint_head_tab_c3{
+    width: 50%;
+    text-align: right;
+}
+.sprint_head_tab{
+    padding: 0;
+    margin: 0;
+}
+
+.tab_links{
+    padding: 2px;
+}
+
+#new_sprint_form{
+    padding: 10px;
+}
+
+.no_us_to_assign{
+    border: 2px dashed orange; 
+}
+
+.no_US{
+    border: 1px dashed orange;
+    background: white;
+    text-align: center;
+}
+
+.tab_fill{
+    height: 100%;
+}
+
+.tab_us_status{
+    min-width: 35px;
+}
+
+.tab_us_links{
+    width: 60px;
+    min-width: 60px;
+}
+
+.tab_us_name2{
+    min-width: 200px;
+    font-weight: normal;
+    cursor: move;
+}
+
+.new_us{
+    background: #ccff66;
+}
+
+.new_us a{
+    color: green;
+}
+
+.sprint_0{
+    margin: 5px auto auto auto;
+    height: 100%;
+    border: 1px solid white;
+    padding: 2px 0;
+}
+
+.sprint_0 tr{
+    vertical-align: top;
+}
+
+.sprint_0.hover{
+    background-color: #ccffcc;
+    border: 2px dashed orange;
+}
+
+
+#backlog-right {
+    clear:left;
+	float:left;
+	width:100%;
+	overflow: visible;
+}
+#backlog-left {
+    float:left;
+	width:100%;
+	position:relative;
+	right:50%;
+	overflow: visible;
+}
+#bl-right {
+	float:left;
+	width:48%;
+	position:relative;
+	left:52%;
+	overflow:visible;
+
+}
+#bl-left {
+	float:left;
+	width:48%;
+	position:relative;
+	left:50%;
+	overflow:visible;
+    height: 100%;
+
+}
+
+
+.backlog-bg{
+    float:left;
+    min-width: 950px;
+    width: 100%;
+
+}
+
+.backlog-user-stories{
+    float:left;
+    min-width: 340px;
+    width: 33%;
+    height: 100%;
+    padding: 5px;
+    margin: 5px;
+    vertical-align: top;
+    border: 1px solid #cccccc;
+}
+
+.sprints{
+    float:left;
+    min-width: 640px;
+    width: 63%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px dashed #009933;
+}
+
+.sprint_stats{
+    color: white;
+    border-bottom: 1px dashed;
+    padding-bottom: 10px;
+}
+
+.sprint_stats td{
+    text-align: center;
+}
+
+.sprint_stats_done{
+    border: 2px ridge;
+    border-color: green;
+    background-color: white;
+    color: green;
+    font-weight: bold;
+}
+
+.sprint_stats_total{
+    border: 2px ridge;
+    border-color: blue;
+    background-color: white;
+    color: blue;
+    font-weight: bold;
+}
+
+dt.user_story_task{
+    background: transparent url(/plugin_assets/redmine_sprints/images/task_show.png) top left;
+
+}
+
+.backlog_sprint{
+    margin-top: 0;
+    padding: 2px;
+    background-color: #d9e8f1;
+    color: #1a659b;
+}
+
+.backlog_sprint img{
+    vertical-align:text-top;
+}
+
+.backlog_sprint table{
+    width: 100%;
+}
+
+.backlog_sprint hr{
+    color: white;
+    background: white;
+}
+
+.tab_backlog_header{
+    min-width: 70px;
+    width: 70px;
+    text-align: center;
+}
+
+.tab_sprint_target{
+    width: 80%;
+    min-width: 400px;
+}
+
+.tab_sprint_links{
+    width: 50px;
+    min-width: 50px;
+    text-align: right;
+}
+
+.tab_sprint_time{
+    width: 100px;
+}
+
+.tab_sprint_done_text{
+    width: 220px;
+    min-width: 200px;
+    text-align: left;
+    display: inline;
+}
+
+.tab_sprint_done_text p{
+    float: left;
+    width: 90px;
+    text-align: right;
+    color: #1a659b;
+    font-weight: normal;
+    padding: 0 0 0 0;
+    margin-left:-5px;
+}
+
+.tab_sprint_end{
+    width: 180px;
+    text-align: right;
+}
+
+.us_status{
+    width: 120px;
+    text-align: left;
+	margin: 3px 0 0 0;
+	float: left;
+}
+
+.status_bar{
+    border: 1px solid;
+    background: white;
+    width: 120px;
+    height: 12px;
+    display: inline-block;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+.status_bar p{
+	padding: 0 0 0 5px;
+	margin: 0;
+	text-align:left;
+    font-size: smaller;
+    height: 12px;
+    min-height: 12px;
+    max-height: 12px;
+}
+
+.tab_sprint_user_story{
+    width: 25px;
+    min-width: 25px;
+    border: 1px solid red;
+    background-color: #ff9393;
+    color: #ffffff;
+}
+
+.tab_sprint_user_story_accepted{
+    width: 25px;
+    min-width: 25px;
+}
+
+.tab_sprint_name{
+    width: 70%;
+    min-width: 300px;
+    cursor: move;
+}
+
+.tab_sprint_status{
+    width: 50px;
+    min-width: 50px;
+    text-align: left;
+}
+
+.dashboard_sprint{
+    padding: 2px;
+}
+
+.dashboard_sprint p img{
+    vertical-align: text-top;
+}
+
+.dashboard_main_table{
+    min-width: 700px;
+    width: 100%;
+}
+
+.dashboard_main_table tr,td{
+    padding: 0;
+    margin:0;
+    border: 0;
+}
+
+.tab_us_header{
+    background: #ffffff;
+    border: 1px solid blue;
+    width: 228px;
+    min-width: 228px;
+    max-width: 228px;
+    margin: 2px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.tab_us_pending_header{
+    min-width: 228px;
+    width: 25%;
+}
+
+.tab_us_inprogress_header{
+    min-width: 228px;
+    width: 25%;
+
+}
+
+.tab_us_done_header{
+    min-width: 228px;
+    width: 25%;
+    
+}
+
+.tab_fill{
+    width: 5%;
+}
+
+.tab_us_main{
+    vertical-align: top;
+}
+
+.tab_us_main table{
+    min-width: 234px;
+    width: 100%;
+	background: #99ccff;
+	margin: -3px 0 -3px 0;
+}
+
+.tab_us_name{
+    font-weight: bold;
+}
+
+.tab_us_links{
+    text-align: right;
+}
+
+.tab_us_diagrams{
+    text-align: left;
+}
+.tab_us_diagrams img{
+    background: white;
+    padding: 4px;
+}
+
+.tab_us_description{
+    color: gray;
+    height: 100px;
+}
+
+.us_task{
+    margin: 2px;
+    padding: 2px;
+    min-height:70px;
+    cursor: move;
+    z-index: 1000;
+}
+.the_task_1{
+    background: #ffd2d2;
+    border: 1px solid red;
+    min-height:70px;
+}
+
+.the_task_2{
+    background: #f3e4a8;
+    border: 1px solid orange;
+    min-height:70px;
+}
+
+.the_task_3{
+    background: #b4f3a8;
+    border: 1px solid green;
+    min-height:70px;
+}
+
+.task_center{
+    text-align: center;
+    width: 100%;
+}
+
+.task_right{
+    text-align: right;
+}
+
+.task_description{
+    width: 100%;
+    color: gray;
+    text-align:justify;
+}
+
+.tab_us_align_top{
+    vertical-align: top;
+}
+.tab_us_align_top.hover{
+    background-color: #ccffcc;
+    border: 2px dashed orange;
+}

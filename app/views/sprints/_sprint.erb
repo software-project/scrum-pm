@@ -1,0 +1,87 @@
+<% data = load_sprint_stats(sprint, []) %>
+<div id="<%= "sprint_frame_cont_#{sprint.id}" %>">
+
+  <div class="sprint_fieldset" id="<%= "sprint_frame_#{sprint.id}" %>">
+    <div class="sprint_header" >
+      <table class="sprint_head_tab" cellspacing=0 cellpadding=0>
+        <tr class="sprint_head_tab">
+          <td class="sprint_head_tab_c1">
+            <h3>
+              <%= link_to sprint.name,
+                  {:controller => :sprints, :action => "show", :id => sprint.id, :project_id => @project.identifier }, :id => "sprint_name_#{sprint.id}" %>
+            </h3>
+          </td>
+          <td class="tab_sprint_done_text" id="<%= "sprint_percent_done_#{sprint.id}" %>">
+            <%= render(:partial => "shared/percent_done", :locals => {:data => data}) %>
+          </td>
+          <td class="sprint_head_tab_c3 ">
+            <p class="tab_links">
+              <%= link_to image_tag("/plugin_assets/redmine_sprints/images/edit.png")+ "Edytuj",
+                {:controller => :sprints, :action => :edit, :project_id => @project, :id => sprint.id},
+                {:id => "new_us", :title => "Edycja sprintu",
+                :onclick => "Modalbox.show(this.href, {title: this.title, width: 700}); return false;"}
+              %>
+              <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete'))+" Usuń",
+                :url => {:controller => :sprints, :action => :destroy, :project_id => @project, :id => sprint.id},
+                :confirm => 'Are you sure?'
+              %>
+            </p>
+          </td>
+        </tr>
+        <tr id="<%= "sprint_dates_and_points_#{sprint.id}" %>">
+          <%= render(:partial => "sprints/sprint_dates_and_points", :locals => {:data => data, :sprint => sprint}) %>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="backlog_sprint"> 
+            <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ "Nowa historia użytkownika",
+              {:controller => 'user_stories',:action => 'new', :project_id => @project, :sprint_id => sprint.id},
+              {:id => "new_us", :title => "Nowa historia użytkownika",
+              :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"
+              }
+            %>
+      <% count = 0 %>
+      <table class="sprint_0 sortable" cellspacing=0 cellpadding=0 id="<%= "sprint_" + sprint.id.to_s %>" >
+        <tr>
+          <th class="sortfirstdec">ID</th>
+          <th>Historia użytkownika</th>
+          <th class="tab_sprint_status">Status</th>
+          <th class="tab_sprint_links nosort">Akcje</th>
+        </tr>
+      <!--
+        <tr>
+          <%#*<td class="new_us"></td>%>
+          <td colspan="4" class="new_us">
+            <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ "Nowa historia użytkownika",
+              {:controller => 'user_stories',:action => 'new', :project_id => @project, :sprint_id => sprint.id},
+              {:id => "new_us", :title => "Nowa historia użytkownika",
+              :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"
+              }
+            %>
+          </td>
+        </tr>
+        -->
+        <% if sprint.user_stories.size > 0  %>
+          <% for user_story in sprint.user_stories %>
+            <%= render(:partial => "user_stories/sprint_item", :locals => {:user_story => user_story, :count => count}) %>
+            <% count = 1 - count %>
+          <% end %>
+        <% else %>
+          <tr id=<%= "no_US_#{sprint.id.to_s}" %>>
+            <td colspan="4" class="no_US">Przeciągnij historie użytkowników tutaj, aby przypisać ją do tego sprintu.</td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+<%= drop_receiving_element("sprint_" + sprint.id.to_s,
+  :accept => "us",
+  :before => visual_effect(:highlight, "sprint_" + sprint.id.to_s),
+  :success => "$('tab_us_' + element.id.split('_').last()).remove();",
+  :hoverclass => 'hover',
+  :with   => "'us=' + (element.id.split('_').last())",
+  :url    => {:action=>:assign_us, :sprint => sprint, :project_id => @project }
+)%>

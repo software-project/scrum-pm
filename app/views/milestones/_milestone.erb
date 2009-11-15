@@ -1,0 +1,73 @@
+ <div class="sprint_fieldset" id="<%= "milestone_frame_#{milestone.id}" %>">
+    <div class="sprint_header" >
+      <table class="sprint_head_tab" cellspacing=0 cellpadding=0>
+        <tr class="sprint_head_tab">
+          <td class="sprint_head_tab_c1">
+            <h3>
+              <%= milestone.target %>
+            </h3>
+          </td>
+          <td class="tab_sprint_done_text">
+            <div class="us_status">
+              <div class="status_bar">
+                <% data = load_sprint_stats(milestone, []) %>
+                <div style="width:<%=h data[:percent_done] -%>; background: #92ec56; height: 12px;">
+                  <p>Wykonanych: <%= data[:percent_done] %></p>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="sprint_head_tab_c3 ">
+            <p class="tab_links">
+              <%= link_to image_tag("/plugin_assets/redmine_sprints/images/edit.png")+ "Edytuj",
+                {:controller => :milestones, :action => :edit, :project_id => @project, :id => milestone.id},
+                {:id => "new_us", :title => "Edycja kamienia milowego",
+                :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
+              %>
+              <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete'))+" Usuń",
+                :url => {:controller => :milestones, :action => :destroy, :project_id => @project, :id => milestone.id},
+                :confirm => 'Are you sure?'
+              %>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="tab_sprint_time"></td>
+          <td><b>Punkty <%= data[:done] %>/<%= data[:all_points] %></b></td>
+          <td class="tab_sprint_end"><p><%= image_tag("/plugin_assets/redmine_sprints/images/time_end.png", :class => "middle") %> Termin: <%= milestone.deadline %></p></td>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="backlog_sprint">
+      <% count = 0 %>
+      <table class="sprint_0 sortable" cellspacing=0 cellpadding=0 id="<%= "milestone_" + milestone.id.to_s %>" >
+        <tr>
+          <th class="sortfirstdec">ID</th>
+          <th>Historia użytkownika</th>
+          <th class="tab_backlog_header">Sprint</th>
+          <th class="tab_backlog_header">Priorytet</th>
+          <th class="tab_sprint_status">Status</th>
+          <th class="tab_sprint_links nosort">Akcje</th>
+        </tr>
+        <% if milestone.user_stories.size > 0  %>
+          <% for user_story in milestone.user_stories %>
+            <%= render(:partial => "user_stories/milestone_item", :locals => {:user_story => user_story, :count => count}) %>
+            <% count = 1 - count %>
+          <% end %>
+        <% else %>
+          <tr id=<%= "no_milestone_#{milestone.id.to_s}" %>>
+            <td colspan="6" class="no_US">Przeciągnij historie użytkowników tutaj, aby przypisać ją do tego kamienia milowego.</td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<%= drop_receiving_element("milestone_" + milestone.id.to_s,
+  :accept => "us",
+  :before => visual_effect(:highlight, "milestone_" + milestone.id.to_s),
+  :hoverclass => 'hover',
+  :with   => "'us=' + (element.id.split('_').last())",
+  :url    => {:action=>:assign_to_milestone, :milestone => milestone, :project_id => @project }
+)%>

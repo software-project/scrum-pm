@@ -1,0 +1,37 @@
+<tr class="<%= classify( count )  %>" id="tab_us_<%= user_story.id %>">
+  <td>
+    <div class="tab_sprint_user_story">#
+      <%= user_story.us_number %>
+    </div>
+  </td>
+  <td class="tab_us_name2">
+    <div class="us" id="<%= "us_#{user_story.id}" %>" style="cursor:move">
+      <%=h user_story.name %>
+    </div>
+  </td>
+  <td class="tab_backlog_header">
+    <%= user_story.priority %>
+  </td>
+  <%#*<td class="tab_us_status">%>
+    <%# if us_done?(user_story) %>
+      <%#= image_tag("/plugin_assets/redmine_sprints/images/done.png", :class => "middle") %>
+    <%# else %>
+      <%#= image_tag("/plugin_assets/redmine_sprints/images/time.png", :class => "middle") %>
+    <%# end %>
+    <%#= user_story.time_estimate.estimation -%>
+  <%#*</td>%>
+  <td class="tab_backlog_header">
+    <%= user_story.time_estimate.estimation -%>
+  </td>
+  <td class="tab_us_links">
+    <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_edit.png"),
+      {:controller => :user_stories, :action => :edit, :project_id => @project, :id => user_story.id},
+      {:id => "edit_us", :title => "Edycja historii użytkownika", :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
+    %>
+    <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete')),
+      :url => {:controller => :user_stories, :action => :destroy, :project_id => @project, :id => user_story.id},
+      :confirm => 'Are you sure?'
+    %>
+  </td>
+</tr>
+<%= draggable_element "us_#{user_story.id}".to_sym, :revert => true %>

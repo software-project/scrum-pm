@@ -1,0 +1,62 @@
+<h1>Nowy diagram</h1>
+
+<%= error_messages_for :diagram %>
+<% form_for @diagram, :url => {:action => "create", :project_id => @project.identifier},:html => { :multipart => true } do |f| -%>
+
+  <%= f.hidden_field :user_story_id %>
+  
+  <p>
+    <%= f.label :nazwa %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <label for="diagram">Upload A Diagram:</label><br/>
+    <%= f.file_field :uploaded_data %>
+  </p>
+  <p>
+    <%= submit_tag 'Create' %>
+  </p>
+<% end -%>
+
+
+<%# form_for(@diagram) do |f| %>
+  <%#= f.error_messages %>
+
+  <%#*<p>%>
+    <%#= f.label :user_story_id %><br />
+    <%#= f.text_field :user_story_id %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :project_id %><br />
+    <%#= f.text_field :project_id %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :content_type %><br />
+    <%#= f.text_field :content_type %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :filename %><br />
+    <%#= f.text_field :filename %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :thumbnail %><br />
+    <%#= f.text_field :thumbnail %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :size %><br />
+    <%#= f.text_field :size %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :width %><br />
+    <%#= f.text_field :width %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.label :height %><br />
+    <%#= f.text_field :height %>
+  <%#*</p>%>
+  <%#*<p>%>
+    <%#= f.submit "Create" %>
+  <%#*</p>%>
+<%# end %>
+
+<%= link_to 'Back', :back %>

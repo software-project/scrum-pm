@@ -1,0 +1,61 @@
+
+
+thead, tfoot {
+	background-color: #DDD;
+}
+
+
+.sortcol {
+	cursor: pointer;
+	padding-right: 20px;
+	background-repeat: no-repeat;
+	background-position: right;
+}
+.sortasc {
+	background-color: #DDFFAC;
+	background-image: url(/images/up.gif);
+}
+.sortdesc {
+	background-color: #B9DDFF;
+	background-image: url(/images/down.gif);
+}
+.nosort {
+	cursor: default;
+}
+
+.urg1, .urg2, .urg3, .urg4, .urg5 {
+	padding: 3px;
+	text-align: center;
+	border: 1px solid #333;
+	width: 3em;
+}
+
+.urg1 {
+	background-color: #FFFACD;
+}
+.urg2 {
+	background-color: #FFD700;
+}
+.urg3 {
+	background-color: Orange;
+}
+.urg4 {
+	background-color: #FF6347;
+}
+.urg5 {
+	background-color: Red;
+}
+
+.scroll-table-head {
+    width: 800px;
+}
+
+.scroll-table-body {
+    width: 800px;
+    height: 400px;				
+}
+.scroll-table-body td {
+	padding-right: 20px;
+	overflow: hidden;
+}
+

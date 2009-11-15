@@ -1,0 +1,32 @@
+<h1>Nowe zadanie</h1>
+<% form_for @task, :url => {:action => "create", :project_id => @project.identifier, :userstory_id => params[:userstory_id]} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nazwa %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :opis %><br />
+    <%= f.text_area :description,
+                       :cols => 60,
+                       :rows => (@task.description.blank? ? 10 : [[10, @task.description.length / 50].max, 100].min),
+                       :accesskey => accesskey(:edit),
+                       :class => 'wiki-edit' %>
+  </p>
+  <p>
+    <b><%= f.label :developerzy %></b>
+    <%#= project_developers[0].class.name.to_s %>
+    <%= collection_multiple_select('task', 'user_ids', project_developers, :id, :name) %>
+  </p>
+  <p>
+    <%= f.label :status %> <br/>
+    <%= f.collection_select( :status_id, Status.find(:all), :id, :name) %>
+  </p>
+  <p>
+    <%= f.submit "Dodaj" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :back %>
+<%= wikitoolbar_for 'task_description' %>

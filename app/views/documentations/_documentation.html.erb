@@ -1,0 +1,34 @@
+<div class="documentation">
+  <h3>Dokumentacje</h3>
+  <% repo = Repository.find_by_project_id(project.id) %>
+  <% setup = SprintsSetup.find_by_project_id(project.id) %>
+  <% unless repo.nil? %>
+      <% if setup.nil? %>
+        <% form_tag :controller => "documentations", :action => "setup", :project_id => project.identifier do %>
+          <%#= collection_select(SprintsSetup.new, :language, ["Java", "Ruby"]) %>
+          <p>Proszę wybrać język programowania projektu: </p>
+          <select name="SprintSetup">
+            <option value="Java" selected="selected">Java</option>
+            <option value="Ruby">Ruby</option>
+          </select>
+          <%= submit_tag 'Ustaw' %>
+        <% end %>
+      <% else %>
+        <p>
+          Repozytorium jest w wersji: <b><%= repo.changesets.first.revision %></b> 
+        </p>
+        <p>
+          Akcje:
+          <%= link_to image_tag("/plugin_assets/redmine_sprints/images/repo_update.png", :title => "Uaktualnij lokalne repozytorium"),
+            {:controller => "documentations", :action => :update_repo, :project_id => project.identifier}, :method => :post %>
+          <%= link_to image_tag("/plugin_assets/redmine_sprints/images/doc_generate.png", :title => "Generuj dokumentację"),
+            {:controller => "documentations", :action => :generate_documentation, :project_id => project.identifier}, :method => :post %>
+        </p>
+        <%= render(:partial => "documentations/languages/#{setup.language.downcase}", :locals => {:project => project, :setup => setup}) %>
+      <% end %>
+  <% else %>
+  <p>
+    Skonfigurój najpierw repozytorium.
+  </p>
+  <% end %>
+</div>

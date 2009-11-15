@@ -1,0 +1,44 @@
+<h1>Editing diagram</h1>
+
+<% form_for(@diagram) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_story_id %><br />
+    <%= f.text_field :user_story_id %>
+  </p>
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.text_field :project_id %>
+  </p>
+  <p>
+    <%= f.label :content_type %><br />
+    <%= f.text_field :content_type %>
+  </p>
+  <p>
+    <%= f.label :filename %><br />
+    <%= f.text_field :filename %>
+  </p>
+  <p>
+    <%= f.label :thumbnail %><br />
+    <%= f.text_field :thumbnail %>
+  </p>
+  <p>
+    <%= f.label :size %><br />
+    <%= f.text_field :size %>
+  </p>
+  <p>
+    <%= f.label :width %><br />
+    <%= f.text_field :width %>
+  </p>
+  <p>
+    <%= f.label :height %><br />
+    <%= f.text_field :height %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @diagram %> |
+<%= link_to 'Back', diagrams_path %>

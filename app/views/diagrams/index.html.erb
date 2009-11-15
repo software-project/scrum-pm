@@ -1,0 +1,35 @@
+<h1>Listing diagrams</h1>
+
+<table>
+  <tr>
+    <th>User story</th>
+    <th>Project</th>
+    <th>Content type</th>
+    <th>Filename</th>
+    <th>Thumbnail</th>
+    <th>Size</th>
+    <th>Width</th>
+    <th>Height</th>
+  </tr>
+
+<% for diagram in @diagrams %>
+  <tr>
+    <td><%=h diagram.user_story_id %></td>
+    <td><%=h diagram.project_id %></td>
+    <td><%=h diagram.content_type %></td>
+    <td><%=h diagram.filename %></td>
+    <td><%=h diagram.thumbnail %></td>
+    <td><%=h diagram.size %></td>
+    <td><%=h diagram.width %></td>
+    <td><%=h diagram.height %></td>
+    <td><%= link_to 'Show', diagram %></td>
+    <td><%= link_to 'Edit', edit_diagram_path(diagram) %></td>
+    <td><%= link_to 'Destroy', diagram, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag(diagram.public_filename(:thumb)), diagram.public_filename %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New diagram', new_diagram_path %>

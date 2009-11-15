@@ -1,0 +1,32 @@
+<h1>Editing task</h1>
+
+<% form_for( :task, @task, :url => {:action => 'update', :id => @task.id , :project_id => @project.identifier }, :method => :post) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :opis %><br />
+    <%= f.text_area :description,
+                       :cols => 60,
+                       :rows => (@task.description.blank? ? 10 : [[10, @task.description.length / 50].max, 100].min),
+                       :accesskey => accesskey(:edit),
+                       :class => 'wiki-edit' %>
+  </p>
+  <p>
+    <b><%= f.label :developerzy %></b>
+    <%= collection_multiple_select('task', 'user_ids', project_developers, :id, :name) %>
+  </p>
+  <p>
+    <%= f.label :status %> <br/>
+    <%= f.collection_select( :status_id, Status.find(:all), :id, :name) %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :back %>
+<%= wikitoolbar_for 'task_description' %>

@@ -1,0 +1,11 @@
+
+<div id="new_issue_remote_form">
+<% labelled_tabular_remote_form_for :issue, @issue, 
+  :url => {:controller => "issue_sprints", :action => "create", :project_id => @project.identifier},
+  :html => {:method => :post, :multipart => true, :id => 'issue-form'} do |f| %>
+
+  <%= f.error_messages %>
+    <%= render :partial => 'issue_sprints/form', :locals => {:f => f} %>
+    <%= f.submit "Dodaj", :onclick => 'Modalbox.hide()' %>
+<% end %>
+</div>

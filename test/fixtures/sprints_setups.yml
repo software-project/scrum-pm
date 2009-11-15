@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+
+  language: MyString
+
+  path: MyString
+
+two:
+  id: 2
+
+  language: MyString
+
+  path: MyString
+

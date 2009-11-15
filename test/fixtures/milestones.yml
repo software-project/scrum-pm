@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+
+  target: MyString
+
+  deadline: 2009-06-15
+
+two:
+  id: 2
+
+  target: MyString
+
+  deadline: 2009-06-15
+
