@@ -13,7 +13,7 @@
     <%= if user_story.sprint != nil
         user_story.sprint.name
       else
-        "Nieprzypisany"
+        l('unassigned')
       end
     %>
   </td>
@@ -31,11 +31,11 @@
   <td class="tab_us_links">
     <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_edit.png"),
       {:controller => :user_stories, :action => :edit, :project_id => @project, :id => user_story.id},
-      {:id => "edit_us", :title => "Edycja historii użytkownika", :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
+      {:id => "edit_us", :title => l('user_story_edit'), :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
     %>
     <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete')),
       :url => {:controller => :user_stories, :action => :destroy, :project_id => @project, :id => user_story.id},
-      :confirm => 'Are you sure?'
+      :confirm => l('Are you sure?')
     %>
   </td>
 </tr>

@@ -1,11 +1,11 @@
 <div class="sprint_stats">
 <table>
   <tr>
-    <th>Suma punktów</th>
+    <th><%= l('total_points') %></th>
     <%#*<th>Oczekujące</th>%>
     <%#*<th>W trakcie wykonywania</th>%>
-    <th>Wykonane punkty</th>
-    <th>Procent wykonanych</th>
+    <th><%= l('done') %></th>
+    <th><%= l('percent_done') %></th>
   </tr>
   <tr>
     <% if defined? sprint %>

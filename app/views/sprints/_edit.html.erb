@@ -3,7 +3,7 @@
   :html => {:method => :post, :multipart => true, :id => 'sprint-form'} do |f| %>
 
     <%= render(:partial => "sprints/form", :locals => {:f => f}) %>
-    <%= f.submit "Uaktualnij", :onclick => 'Modalbox.hide()' %>
+    <%= f.submit l('update'), :onclick => 'Modalbox.hide()' %>
 
   <%#*<p>%>
     <%#= f.label :sprint_no %><br />

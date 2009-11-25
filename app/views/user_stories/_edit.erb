@@ -5,11 +5,11 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :nazwa %><br />
+    <%= f.label t :name %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :opis %><br />
+    <%= f.label t :description %><br />
     <p><%= f.text_area :description,
                        :cols => 60,
                        :rows => (@user_story.description.blank? ? 10 : [[10, @user_story.description.length / 50].max, 100].min),
@@ -17,16 +17,16 @@
                        :class => 'wiki-edit' %></p>
   </p>
   <p>
-    <%= f.label :priorytet %> <br/>
+    <%= f.label l('priority') %> <br/>
     <%= f.spinbox_field :priority, :value => 1, :align => "right" %>
   </p>
   <p>
-    <%= f.label :estymacja %> <br/>
+    <%= f.label l('estimation') %> <br/>
     <%= f.collection_select( :time_estimate_id, TimeEstimate.find(:all), :id, :estimation) %>
   </p>
   <%= f.hidden_field :version_id %>
   <p>
-    <%= f.submit "Uaktualnij", :onclick => 'Modalbox.hide()' %>
+    <%= f.submit l('update'), :onclick => 'Modalbox.hide()' %>
   </p>
 <% end %>
 

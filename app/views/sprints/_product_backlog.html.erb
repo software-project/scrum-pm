@@ -1,22 +1,22 @@
 <div class="sprints_fieldset">
   <div class="sprints_header">
 
-    <%= link_to_function("<h3>Backlog</h3>", "Effect.toggle('sprint_0_c', 'blind');") %>
+    <%= link_to_function("<h3>#{l('backlog')}</h3>", "Effect.toggle('sprint_0_c', 'blind');") %>
   </div>
 
   <div class="backlog_sprint" id="sprint_0_c">
-  <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ "Nowa historia użytkownika",
+  <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ l('new_user_story'),
     {:controller => 'user_stories',:action => 'new', :project_id => @project},
-    {:id => "new_us", :title => "Nowa historia użytkownika",
+    {:id => "new_us", :title => l('new_user_story'),
     :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
   %>
   <table cellspacing=0 cellpadding=0 id="sprint_0" class="sprint_0 sortable">
     <tr>
       <th class="sortfirstdec">ID</th>
-      <th>Historia użytkownika</th>
-      <th class="tab_backlog_header">Priorytet</th>
-      <th class="tab_backlog_header">Estymacja</th>
-      <th class="tab_sprint_links nosort">Akcje</th>
+      <th><%= l('user_story') %></th>
+      <th class="tab_backlog_header"><%= l('priority') %></th>
+      <th class="tab_backlog_header"><%= l('estiamtion') %></th>
+      <th class="tab_sprint_links nosort"><%= l('actions') %></th>
     </tr>
     <% unasssigned_us = UserStory.find(:all, :conditions => "version_id is null and project_id = #{@project.id}", :order => "priority ASC")  %>
 
@@ -31,7 +31,7 @@
     <% else %>
       <tr id="no_US_0">
         <td class="no_US" id="sprint_0_empty" colspan="5">
-          <p>Wszystkie historie użytkowników zostały przydzielone</p>
+          <p><%= l('add_user_stories_are_assign') %></p>
         </td>
       </tr>
     <% end %>

@@ -9,11 +9,11 @@
     <div id="bl-right">
       <div class="sprints_fieldset">
         <div class="sprints_header">
-          <h3>Sprinty</h3>
+          <h3><%= l('sprints') %></h3>
         </div> 
 
-        <%= link_to image_tag("/plugin_assets/redmine_sprints/images/add.png")+'Nowy Sprint', {:action => :new, :project_id => @project.identifier },
-          {:id => "new_sprint", :title => "Nowy sprint",
+        <%= link_to image_tag("/plugin_assets/redmine_sprints/images/add.png")+l('new_sprint'), {:action => :new, :project_id => @project.identifier },
+          {:id => "new_sprint", :title => l('new_sprint'),
           :onclick => "Modalbox.show(this.href, {title: this.title, width: 700}); return false;"} %>
         <div id="sprints_fieldset_main">
           <% for sprint in @sprints %>

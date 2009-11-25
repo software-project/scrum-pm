@@ -1,6 +1,6 @@
 require 'redmine'
-require 'form_helper_extensions'
 require 'dispatcher'
+require 'form_helper_extensions'
 require 'version_patch'
 require 'issue_patch'
 
@@ -8,7 +8,10 @@ Dispatcher.to_prepare do
   Version.send( :include, VersionPatch )
   Issue.send( :include, IssuePatch)
 end
-
+#Dispatcher.to_prepare do
+#  Version.class_eval { include VersionPatch }
+#  Issue.class_eval { include IssuePatch }
+#end
 
 Redmine::Plugin.register :redmine_sprints do
   name 'Redmine Scrum Sprints plugin'

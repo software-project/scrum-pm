@@ -6,9 +6,9 @@ class CreateStatuses < ActiveRecord::Migration
       t.timestamps
     end
     
-    Status.create :name => "Pending"
-    Status.create :name => "In Progress"
-    Status.create :name => "Done"
+#    Status.create :name => "Pending"
+#    Status.create :name => "In Progress"
+#    Status.create :name => "Done"
   end
 
   def self.down

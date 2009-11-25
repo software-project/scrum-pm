@@ -120,11 +120,14 @@ class SprintsController < ApplicationController
   end
 
   def assign_us
+    ver = nil
     us = UserStory.find(params[:us])
     sprint = nil
     sprint = Version.find(us.version_id) unless us.version_id.nil?
     if !params[:sprint].nil? && params[:sprint].to_s != "0"
-      us.sprint = Version.find(params[:sprint])
+      ver = Version.find(params[:sprint])
+      ver.user_stories << [us]
+      ver.save
     else
       us.sprint = nil
     end
@@ -133,13 +136,13 @@ class SprintsController < ApplicationController
     if us.save
       render :update do |p|
         if params[:sprint].to_s != "0"
-          p.insert_html :bottom, "sprint_"+us.version_id.to_s, :partial => "user_stories/sprint_item", :locals => {:user_story => us, :count => us.sprint.user_stories.size}
-          p.insert_html :bottom, "sprint_0", '<tr id="no_US_0"><td class="no_US" id="sprint_0_empty" colspan="5"><p>Wszystkie historie użytkowników zostały przydzielone</p></td></tr>' if sprint.nil? && UserStory.find(:all, :conditions => ["version_id is null and project_id = ?",@project.id], :order => "priority ASC").size == 0
-          p.insert_html :bottom, "sprint_"+sprint.id.to_s, "<tr id=\"no_US_#{sprint.id.to_s}\"><td colspan=\"4\" class=\"no_US\">Przeciągnij historie użytkowników tutaj, aby przypisać ją do tego sprintu.</td></tr>" if !sprint.nil? && sprint.user_stories.size == 0
-          p.replace "no_US_"+us.sprint.id.to_s, "" if us.sprint.user_stories.size == 1
+          p.insert_html :bottom, "sprint_"+us.version_id.to_s, :partial => "user_stories/sprint_item", :locals => {:user_story => us, :count => ver.user_stories.size}
+          p.insert_html :bottom, "sprint_0", '<tr id="no_US_0"><td class="no_US" id="sprint_0_empty" colspan="5"><p>'+l('add_user_stories_are_assign')+'</p></td></tr>' if sprint.nil? && UserStory.find(:all, :conditions => ["version_id is null and project_id = ?",@project.id], :order => "priority ASC").size == 0
+          p.insert_html :bottom, "sprint_"+sprint.id.to_s, "<tr id=\"no_US_#{sprint.id.to_s}\"><td colspan=\"4\" class=\"no_US\">#{l('drag_user_story_here_to_assign_it_to_sprint')}</td></tr>" if !sprint.nil? && sprint.user_stories.size == 0
+          p.replace "no_US_"+ver.id.to_s, "" if ver.user_stories.size == 1
         else
           p.insert_html :bottom, "sprint_0", :partial => "user_stories/backlog_item", :locals => {:user_story => us, :count => UserStory.find(:all, :conditions => ["version_id is null and project_id = ?",@project.id]).size}
-          p.insert_html :bottom, "sprint_"+sprint.id.to_s, "<tr id=\"no_US_#{sprint.id.to_s}\"><td colspan=\"4\" class=\"no_US\">Przeciągnij historie użytkowników tutaj, aby przypisać ją do tego sprintu.</td></tr>" if !sprint.nil? && sprint.user_stories.size == 0
+          p.insert_html :bottom, "sprint_"+sprint.id.to_s, "<tr id=\"no_US_#{sprint.id.to_s}\"><td colspan=\"4\" class=\"no_US\">#{l('drag_user_story_here_to_assign_it_to_sprint')}</td></tr>" if !sprint.nil? && sprint.user_stories.size == 0
           p.replace "no_US_0", "" if !sprint.nil? && UserStory.find(:all, :conditions => ["version_id is null and project_id = ?",@project.id], :order => "priority ASC").size == 1
         end
       end
@@ -158,7 +161,7 @@ class SprintsController < ApplicationController
       render :update do |p|
         unless past_milestone.nil?
           p.replace "tab_milestone_#{us.id}", ""
-          p.insert_html :bottom, "milestone_#{past_milestone.id}", "<tr id=\"no_milestone_#{past_milestone.id}\"><td colspan=\"6\" class=\"no_US\">Przeciągnij historie użytkowników tutaj, aby przypisać ją do tego kamienia milowego.</td></tr>" if past_milestone.user_stories.size == 0
+          p.insert_html :bottom, "milestone_#{past_milestone.id}", "<tr id=\"no_milestone_#{past_milestone.id}\"><td colspan=\"6\" class=\"no_US\">#{l('drag_user_story_here_to_assign_it_to_milestone')}</td></tr>" if past_milestone.user_stories.size == 0
         end
         p.insert_html :bottom, "milestone_" + milestone.id.to_s, :partial => "user_stories/milestone_item", :locals => {:user_story => us, :count => milestone.user_stories.size}
         p.replace "no_milestone_"+milestone.id.to_s, "" if milestone.user_stories.size == 1

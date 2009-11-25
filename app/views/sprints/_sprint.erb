@@ -16,14 +16,14 @@
           </td>
           <td class="sprint_head_tab_c3 ">
             <p class="tab_links">
-              <%= link_to image_tag("/plugin_assets/redmine_sprints/images/edit.png")+ "Edytuj",
+              <%= link_to image_tag("/plugin_assets/redmine_sprints/images/edit.png")+ l("edit"),
                 {:controller => :sprints, :action => :edit, :project_id => @project, :id => sprint.id},
-                {:id => "new_us", :title => "Edycja sprintu",
+                {:id => "new_us", :title => l('sprint_edit'),
                 :onclick => "Modalbox.show(this.href, {title: this.title, width: 700}); return false;"}
               %>
-              <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete'))+" Usuń",
+              <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete'))+" " +l('delete'),
                 :url => {:controller => :sprints, :action => :destroy, :project_id => @project, :id => sprint.id},
-                :confirm => 'Are you sure?'
+                :confirm => l('Are you sure?')
               %>
             </p>
           </td>
@@ -36,27 +36,27 @@
 
 
     <div class="backlog_sprint"> 
-            <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ "Nowa historia użytkownika",
+            <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ l('new_user_story'),
               {:controller => 'user_stories',:action => 'new', :project_id => @project, :sprint_id => sprint.id},
-              {:id => "new_us", :title => "Nowa historia użytkownika",
+              {:id => "new_us", :title => l('new_user_story'),
               :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"
               }
             %>
       <% count = 0 %>
       <table class="sprint_0 sortable" cellspacing=0 cellpadding=0 id="<%= "sprint_" + sprint.id.to_s %>" >
         <tr>
-          <th class="sortfirstdec">ID</th>
-          <th>Historia użytkownika</th>
-          <th class="tab_sprint_status">Status</th>
-          <th class="tab_sprint_links nosort">Akcje</th>
+          <th class="sortfirstdec"><%= l('id') %></th>
+          <th><%= l('user_story') %></th>
+          <th class="tab_sprint_status"><%= l('status') %></th>
+          <th class="tab_sprint_links nosort"><%= l('actions') %></th>
         </tr>
       <!--
         <tr>
           <%#*<td class="new_us"></td>%>
           <td colspan="4" class="new_us">
-            <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ "Nowa historia użytkownika",
+            <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ l('new_user_story'),
               {:controller => 'user_stories',:action => 'new', :project_id => @project, :sprint_id => sprint.id},
-              {:id => "new_us", :title => "Nowa historia użytkownika",
+              {:id => "new_us", :title => l('new_user_story'),
               :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"
               }
             %>
@@ -70,7 +70,9 @@
           <% end %>
         <% else %>
           <tr id=<%= "no_US_#{sprint.id.to_s}" %>>
-            <td colspan="4" class="no_US">Przeciągnij historie użytkowników tutaj, aby przypisać ją do tego sprintu.</td>
+            <td colspan="4" class="no_US">
+              <%= l('drag_user_story_here_to_assign_it_to_sprint') %>
+            </td>
           </tr>
         <% end %>
       </table>

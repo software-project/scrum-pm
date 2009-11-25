@@ -1,3 +1,32 @@
-
-  label_dashboard: Dashboard
-  label_backlog: Backlog
+label_dashboard: Dashboard
+label_backlog: Backlog
+backlog: Backlog
+new_user_story: Nowa historia u¿ytkownika
+add_user_stories_are_assign: Wszystkie historie u¿ytkowników s¹ przypisane
+user_story: Historia u¿ytkownika
+priority: Priorytet
+ID: ID
+estimation: Estymacja
+actions: Akcje
+new_sprint: Nowy sprint
+days: Dni
+ends_on: Koniec
+points: Punkty
+edit: Edycja
+delete: Usuñ
+sprint_edit: Edycja sprintu
+status: Status
+id: ID
+sprints: Sprinty
+done: Zrobione
+pending: Oczekuj¹cje
+in_progress: W trakcie wykonywania
+drag_user_story_here_to_assign_it_to_sprint: Przeci¹gnij historiê u¿ytownika tutaj, aby przypisaæ j¹ do sprintu.
+drag_user_story_here_to_assign_it_to_milestone: Przeci¹gnij historiê u¿ytownika tutaj, aby przypisaæ j¹ do kamienia milowego.
+sprint_description: Opis sprintu
+new_task: Nowe zadanie
+destroy: Usuñ
+new: Nowy
+show: Poka¿
+choose: Wybierz
+add: Dodaj  

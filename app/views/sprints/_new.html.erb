@@ -5,7 +5,7 @@
   :html => {:method => :post, :multipart => true, :id => 'sprint-form'} do |f| %>
 
     <%= render(:partial => "sprints/form", :locals => {:f => f}) %>
-    <%= f.submit "Dodaj", :onclick => 'Modalbox.hide()' %>
+    <%= f.submit l("add"), :onclick => 'Modalbox.hide()' %>
 
 <%#*<table>%>
   <%#*<tr>%>

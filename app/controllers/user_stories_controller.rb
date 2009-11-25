@@ -119,7 +119,7 @@ class UserStoriesController < ApplicationController
     render :update do |p|
       p["tab_us_#{user_story_id}"].visual_effect :blind_up, :duration => 1
       if sprint_id != -1
-        p.insert_html :bottom, "sprint_"+sprint_id.to_s, "<tr id=\"no_US_#{sprint_id.to_s}\"><td colspan=\"5\" class=\"no_US\">Przeciągnij historie użytkowników tutaj, aby przypisać ją do tego sprintu.</td></tr>"
+        p.insert_html :bottom, "sprint_"+sprint_id.to_s, "<tr id=\"no_US_#{sprint_id.to_s}\"><td colspan=\"5\" class=\"no_US\">#{l('drag_user_story_here_to_assign_it_to_sprint')}</td></tr>"
         p["sprint_"+sprint_id.to_s].visual_effect :blind_down, :duration => 1
       end
 

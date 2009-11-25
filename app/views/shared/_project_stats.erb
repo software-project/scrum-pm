@@ -5,11 +5,11 @@
   <div id="stat_tab" style="padding: 0; margin:0;">
     <table style="width: 100%;">
       <tr>
-        <th>Suma punktów</th>
-        <th>Oczekujące</th>
-        <th>W trakcie wykonywania</th>
-        <th>Wykonane punkty</th>
-        <th>Procent wykonanych</th>
+        <th><%= l('total_story_points') %></th>
+        <th><%= l('pending') %></th>
+        <th><%= l('in_progress') %></th>
+        <th><%= l('done') %></th>
+        <th><%= l('percent_done') %></th>
       </tr>
       <tr style="text-align: right;">
           <% data = load_project_stats(project) %>
