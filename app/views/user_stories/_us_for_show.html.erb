@@ -1,0 +1,99 @@
+<tr class="<%= classify( count )  %>" id="tab_us_<%= user_story.id %>">
+    <td class="tab_us_main">
+      <%= link_to image_tag("/plugin_assets/redmine_sprints/images/task_add.png")+" "+l('add_task'),
+        {:controller => 'issue_sprints',:action => 'new', :project_id => @project, :user_story_id => user_story.id},
+        {:id => "new_us", :title => l('new_task'),
+        :onclick => "Modalbox.show(this.href, {title: this.title, width: 900, height: 500}); return false;",
+        :style => "float:right;padding:3px;"
+        } %>
+      <%= image_tag("/plugin_assets/redmine_sprints/images/us-top.png") %>
+    <table>
+      <tr >
+        <td><div class="tab_sprint_user_story">#<%= user_story.id %></div></td>
+        <td class="tab_us_name"><%=h user_story.name %></td>
+        <td class="tab_us_links">
+          <!--This will be done at some point-->
+          <%#= link_to_object(user_story, "show", "story") %>
+          <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_edit.png"),
+              {:controller => :user_stories, :action => :edit, :project_id => @project, :id => user_story.id, :target => "show"},
+              {:id => "edit_us", :title => l('user_story_edit'), :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
+          %>
+          <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete')),
+            :url => {:controller => :user_stories, :action => :destroy, :project_id => @project, :id => user_story.id},
+            :confirm => l('Are you sure?')
+          %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" class="tab_us_description">
+            <%= user_story.description -%>
+        </td>
+
+      </tr>
+      <tr>
+        <td colspan="2" class="tab_us_diagrams">
+          <div>
+          <% for diagram in user_story.diagrams %>
+            <%= lightbox_link_to image_tag(diagram.public_filename(:thumb)), diagram.public_filename %>
+          <% end %>
+          </div>
+        </td>
+        <td class="tab_us_links">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p>
+            <%= image_tag("/plugin_assets/redmine_sprints/images/estimation.png", :class => "middle") %> <%= user_story.time_estimate.estimation -%>
+          </p>
+        </td>
+        <td  class="tab_us_links">
+          <%= link_to_new_object("diagram",user_story,"diagram_add") %>
+        </td>
+      </tr>
+    </table>
+    <%= image_tag("/plugin_assets/redmine_sprints/images/us-bottom.png") %>
+    </td>
+    <td></td>
+    <td class="tab_us_align_top" id="<%= "tasks_1_us_#{user_story.id}" %>">
+    <% for task in user_story.issues.find_all{|t| t.done_ratio == 0} %>
+      <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
+    <% end %>
+      </td>
+      <td class="tab_us_align_top" id="<%= "tasks_2_us_#{user_story.id}" %>">
+        <% for task in user_story.issues.find_all{|t| t.done_ratio > 0 && t.done_ratio < 100} %>
+          <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
+        <% end %>
+      </td>
+      <td class="tab_us_align_top" id="<%= "tasks_3_us_#{user_story.id}" %>">
+        <% for task in user_story.issues.find_all{|t| t.done_ratio == 100} %>
+          <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
+        <% end %>
+      </td>
+      <%= drop_receiving_element("tasks_1_us_#{user_story.id}",
+        #:before => "element.shrink();element.remove();",
+        :accept => "us_task",
+        :before => visual_effect(:highlight, "tasks_1_us_#{user_story.id}"),
+        :success => "element.remove();",
+        :with   => "'task_id=' + (element.id.split('_').last())",
+        :hoverclass => 'hover',
+        :url    => {:controller => :issue_sprints, :action => :status_change, :status_id => 1, :project_id => @project, :user_story_id => user_story.id }
+        #"/projects/#{@project.identifier}/tasks/#{task.id}/status_change/#{task.status_id+1}"
+      )%>
+      <%= drop_receiving_element("tasks_2_us_#{user_story.id}",
+        :accept => "us_task",
+        :before => visual_effect(:highlight, "tasks_2_us_#{user_story.id}"),
+        :success => "element.remove();",
+        :with   => "'task_id=' + (element.id.split('_').last())",
+        :hoverclass => 'hover',
+        :url    => {:controller => :issue_sprints, :action => :status_change, :status_id => 2, :project_id => @project, :user_story_id => user_story.id }
+      )%>
+      <%= drop_receiving_element("tasks_3_us_#{user_story.id}",
+        :accept => "us_task",
+        :before => visual_effect(:highlight, "tasks_3_us_#{user_story.id}"),
+        :success => "element.remove();",
+        :with   => "'task_id=' + (element.id.split('_').last())",
+        :hoverclass => 'hover',
+        :url    => {:controller => :issue_sprints, :action => :status_change, :status_id => 3, :project_id => @project, :user_story_id => user_story.id }
+      )%>
+</tr>

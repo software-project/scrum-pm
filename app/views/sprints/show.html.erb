@@ -26,14 +26,14 @@
           <%= link_to image_tag("/plugin_assets/redmine_sprints/images/edit.png"),
             {:controller => :sprints, :action => :edit, :project_id => @project, :id => @sprint.id},
             {:id => "new_us", :title => l('sprint_edit'),
-            :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
+            :onclick => "Modalbox.show(this.href, {title: this.title, width: 700}); return false;"}
           %>
           <%= link_to_object(@sprint, "destroy", "delete") %>
           <%= link_to_new_object("user_story", @sprint, "story_add") %>
         </td>
       </tr>
       <tr >
-        <td class="tab_sprint_target" colspan="3" id="<%= "sprint_target_#{@sprint.id}" %>"><%= l('sprint_description') %> <%=h @sprint.description %></td>
+        <td class="tab_sprint_target" colspan="3" id="<%= "sprint_target_#{@sprint.id}" %>"><%= l('sprint_description') %>: <%=h @sprint.description %></td>
       </tr>
       <tr id="<%= "sprint_dates_and_points_#{@sprint.id}" %>">
         <%= render(:partial => "sprints/sprint_dates_and_points", :locals => {:data => data, :sprint => @sprint}) %>
@@ -45,7 +45,7 @@
 
   <div class="user_stories">
       <% count = 0 %>
-      <table class="dashboard_main_table" cellspacing=0 cellpadding=0>
+      <table class="dashboard_main_table" id="dashboard_main_table" cellspacing=0 cellpadding=0>
         <tr>
           <th class="tab_us_header"><%= l('user_story') %></th>
           <th class="tab_fill"></th>
@@ -53,103 +53,18 @@
           <th class="tab_us_inprogress_header"><%= image_tag("/plugin_assets/redmine_sprints/images/inprogress.png", :class => "middle") %> <%= l('in_progress') %></th>
           <th class="tab_us_done_header"><%= image_tag("/plugin_assets/redmine_sprints/images/done.png", :class => "middle") %> <%= l('done') %></th>
         </tr>
+        <tr>
+          <td colspan="4">
+            <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_add.png")+ l('new_user_story'),
+                {:controller => 'user_stories',:action => 'new', :project_id => @project, :sprint_id => @sprint.id, :target => "show" },
+                {:id => "new_us2", :title => l('new_user_story'),
+                :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;",
+                :style => "padding-left:55px;"}
+              %>
+          </td>
+        </tr>
         <% for user_story in @sprint.user_stories %>
-          <tr class="<%= classify( count )  %>">
-                <td class="tab_us_main">
-                  <%= image_tag("/plugin_assets/redmine_sprints/images/us-top.png") %>
-                <table>
-                  <tr >
-                    <td><div class="tab_sprint_user_story">#<%= user_story.id %></div></td>
-                    <td class="tab_us_name"><%=h user_story.name %></td>
-                    <td class="tab_us_links">
-                      <%= link_to_object(user_story, "show", "story") %>
-                      <%= link_to_object(user_story, "edit", "story_edit") %>
-                      <%= link_to_object(user_story, "destroy", "story_delete") %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3" class="tab_us_description">
-                        <%= user_story.description -%>
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td colspan="2" class="tab_us_diagrams">
-                      <div>
-                      <% for diagram in user_story.diagrams %>
-                        <%= lightbox_link_to image_tag(diagram.public_filename(:thumb)), diagram.public_filename %>
-                        <%#= link_to image_tag(diagram.public_filename(:thumb)), diagram.public_filename, :class => "diagram_thumb" %>
-                      <% end %>
-                      </div>
-                    </td>
-                    <td class="tab_us_links">
-                      <%#= link_to image_tag("/plugin_assets/redmine_sprints/images/diagram_add.png"), {:controller => 'diagrams', :action => 'new', :user_story_diagram =>user_story.id} %>
-
-                      <%= link_to_new_object("diagram",user_story,"diagram_add") %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      <p>
-                        <%= image_tag("/plugin_assets/redmine_sprints/images/estimation.png", :class => "middle") %> <%= user_story.time_estimate.estimation -%>
-                      </p>
-                    </td>
-                    <td  class="tab_us_links">
-                      <%#= link_to_new_object("task",user_story,"task_add") %>
-                      <%= link_to image_tag("/plugin_assets/redmine_sprints/images/task_add.png"),
-                        {:controller => 'issue_sprints',:action => 'new', :project_id => @project, :user_story_id => user_story.id},
-                        {:id => "new_us", :title => l('new_task'),
-                        :onclick => "Modalbox.show(this.href, {title: this.title, width: 900, height: 500}); return false;"
-                        }
-                      %>
-                    </td>
-                  </tr>
-                </table>
-                <%= image_tag("/plugin_assets/redmine_sprints/images/us-bottom.png") %>
-                </td>
-                <td></td>
-                <td class="tab_us_align_top" id="<%= "tasks_1_us_#{user_story.id}" %>">
-                <% for task in user_story.issues.find_all{|t| t.done_ratio == 0} %>
-                  <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
-                <% end %>
-              </td>
-              <td class="tab_us_align_top" id="<%= "tasks_2_us_#{user_story.id}" %>">
-                <% for task in user_story.issues.find_all{|t| t.done_ratio > 0 && t.done_ratio < 100} %>
-                  <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
-                <% end %>
-              </td>
-              <td class="tab_us_align_top" id="<%= "tasks_3_us_#{user_story.id}" %>">
-                <% for task in user_story.issues.find_all{|t| t.done_ratio == 100} %>
-                  <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
-                <% end %>
-              </td>
-              <%= drop_receiving_element("tasks_1_us_#{user_story.id}",
-                #:before => "element.shrink();element.remove();",
-                :accept => "us_task",
-                :before => visual_effect(:highlight, "tasks_1_us_#{user_story.id}"),
-                :success => "element.remove();",
-                :with   => "'task_id=' + (element.id.split('_').last())",
-                :hoverclass => 'hover',
-                :url    => {:controller => :issue_sprints, :action => :status_change, :status_id => 1, :project_id => @project, :user_story_id => user_story.id }
-                #"/projects/#{@project.identifier}/tasks/#{task.id}/status_change/#{task.status_id+1}"
-              )%>
-              <%= drop_receiving_element("tasks_2_us_#{user_story.id}",
-                :accept => "us_task",
-                :before => visual_effect(:highlight, "tasks_2_us_#{user_story.id}"),
-                :success => "element.remove();",
-                :with   => "'task_id=' + (element.id.split('_').last())",
-                :hoverclass => 'hover',
-                :url    => {:controller => :issue_sprints, :action => :status_change, :status_id => 2, :project_id => @project, :user_story_id => user_story.id }
-              )%>
-              <%= drop_receiving_element("tasks_3_us_#{user_story.id}",
-                :accept => "us_task",
-                :before => visual_effect(:highlight, "tasks_3_us_#{user_story.id}"),
-                :success => "element.remove();",
-                :with   => "'task_id=' + (element.id.split('_').last())",
-                :hoverclass => 'hover',
-                :url    => {:controller => :issue_sprints, :action => :status_change, :status_id => 3, :project_id => @project, :user_story_id => user_story.id }
-              )%>
-          </tr>
+          <%= render :partial => "user_stories/us_for_show", :locals => {:user_story => user_story, :count => count} %>  
           <% count = 1 - count %>
         <% end %>
       </table>

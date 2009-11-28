@@ -5,15 +5,15 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :cel %><br />
+    <%= f.label l('target') %><br />
     <%= f.text_field :target %>
   </p>
   <p>
-    <%= f.label 'Deadline' %><br />
+    <%= f.label l('deadline') %><br />
     <%= f.text_field :deadline, :size => 10 %><%= calendar_for('milestone_deadline') %>
   </p>
   <p>
-    <%= f.submit "Dodaj", :onclick => 'Modalbox.hide()' %>
+    <%= f.submit l('add'), :onclick => 'Modalbox.hide()' %>
   </p>
 <% end %>
 

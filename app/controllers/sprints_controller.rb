@@ -102,7 +102,7 @@ class SprintsController < ApplicationController
         p.replace_html "sprint_name_#{@sprint.id}", "#{@sprint.name}"
         p.replace_html "sprint_percent_done_#{@sprint.id}", :partial => "shared/percent_done", :locals => {:data => data}
         p.replace_html "sprint_dates_and_points_#{@sprint.id}", :partial => "sprints/sprint_dates_and_points", :locals => {:data => data, :sprint => @sprint}
-        p.replace_html "sprint_target_#{@sprint.id}", "Cel iteracji:" + @sprint.description
+        p.replace_html "sprint_target_#{@sprint.id}", l('sprint_description')+":" + @sprint.description
 #        p.insert_html :top, "sprint_frame_cont_#{@sprint.id}", :partial => "sprints/sprint", :locals => {:sprint => @sprint}
         p["sprint_frame_cont_#{@sprint.id}"].visual_effect :highlight, :duration => 1
       end
@@ -301,7 +301,7 @@ class SprintsController < ApplicationController
     priority = params[:priority_id].blank? ? nil : Enumeration.find_by_id(params[:priority_id])
     assigned_to = (params[:assigned_to_id].blank? || params[:assigned_to_id] == 'none') ? nil : User.find_by_id(params[:assigned_to_id])
     category = (params[:category_id].blank? || params[:category_id] == 'none') ? nil : @project.issue_categories.find_by_id(params[:category_id])
-    fixed_version = (params[:sprint].blank? || params[:sprint] == 'none') ? nil : @project.versions.find_by_id(params[:sprint])
+    fixed_version = (params[:sprint].blank? || params[:sprint].eql?('0')) ? nil : @project.versions.find_by_id(params[:sprint])
     
     unsaved_issue_ids = []      
     user_story.issues.each do |issue|
@@ -309,7 +309,7 @@ class SprintsController < ApplicationController
       issue.priority = priority if priority
       issue.assigned_to = assigned_to if assigned_to || params[:assigned_to_id] == 'none'
       issue.category = category if category || params[:category_id] == 'none'
-      issue.fixed_version = fixed_version if fixed_version || params[:fixed_version_id] == 'none'
+      issue.fixed_version = fixed_version
       issue.start_date = params[:start_date] unless params[:start_date].blank?
       issue.due_date = params[:due_date] unless params[:due_date].blank?
       issue.done_ratio = params[:done_ratio] unless params[:done_ratio].blank?

@@ -2,9 +2,9 @@
 <div id="backlog-right">
   <div id="backlog-left">
     <div id="bl-left">
-      <%#= render(:partial => "shared/project_stats", :locals => {:project => @project}) %>
+      <%= render(:partial => "shared/project_stats", :locals => {:project => @project}) %>
       <%= render(:partial => "sprints/product_backlog") %>
-      <%= render(:partial => "milestones/milestones") %>
+      <%#= render(:partial => "milestones/milestones") %>
     </div>
     <div id="bl-right">
       <div class="sprints_fieldset">

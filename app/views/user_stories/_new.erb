@@ -1,7 +1,7 @@
 <div id="new_us_form_cont">
 <div id="new_us_form">
 
-<% remote_form_for @user_story, :url => {:controller => 'user_stories', :action => "create", :project_id => @project.identifier},:html => { :method => :put} do |f| %>
+<% remote_form_for @user_story, :url => {:controller => 'user_stories', :action => "create", :project_id => @project.identifier, :target => target},:html => { :method => :put} do |f| %>
   <%= f.error_messages %>
 
   <p>

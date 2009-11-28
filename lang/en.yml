@@ -31,3 +31,12 @@ new: New
 show: Show
 choose: Choose
 add: Add
+
+user_story_edit: Edit user story
+name: Name
+description: Description
+update: Update
+add_task: Add task
+stats: Statistics
+total_story_points: Total story points
+percent_done: Percent done

@@ -6,6 +6,6 @@
 
   <%= f.error_messages %>
     <%= render :partial => 'issue_sprints/form', :locals => {:f => f} %>
-    <%= f.submit "Dodaj", :onclick => 'Modalbox.hide()' %>
+    <%= f.submit l('add'), :onclick => 'Modalbox.hide()' %>
 <% end %>
 </div>

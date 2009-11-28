@@ -40,13 +40,13 @@ class UserStoriesController < ApplicationController
     else
 
     end
-    render :partial => "user_stories/new", :locals => {:user_story => @user_story}
+    render :partial => "user_stories/new", :locals => {:user_story => @user_story, :target => params[:target]}
   end
 
   # GET /user_stories/1/edit
   def edit
     @user_story = UserStory.find(params[:id])
-    render :partial => "user_stories/edit", :locals => {:user_story => @user_story}
+    render :partial => "user_stories/edit", :locals => {:user_story => @user_story, :target => params[:target]}
   end
 
   # POST /user_stories
@@ -65,9 +65,15 @@ class UserStoriesController < ApplicationController
           p.insert_html :bottom, 'sprint_0', :partial => "user_stories/backlog_item", :locals => {:user_story => @user_story, :count => unassigned_us.size + 1}
           p["tab_us_#{@user_story.id}"].visual_effect :highlight, :duration => 2
         else
-          p.insert_html :bottom, "sprint_#{@user_story.version_id}", :partial => "user_stories/sprint_item", :locals => {:user_story => @user_story, :count => @user_story.sprint.user_stories.size + 1}
-          p["tab_us_#{@user_story.id}"].visual_effect :highlight, :duration => 2
-          p["no_US_#{@user_story.version_id}"].visual_effect :blind_up, :duration => 1
+          if params[:target].blank?
+            p.insert_html :bottom, "sprint_#{@user_story.version_id}", :partial => "user_stories/sprint_item", :locals => {:user_story => @user_story, :count => @user_story.sprint.user_stories.size + 1}
+            p["tab_us_#{@user_story.id}"].visual_effect :highlight, :duration => 2
+            p["no_US_#{@user_story.version_id}"].visual_effect :blind_up, :duration => 1
+          else
+            if params[:target].eql? "show"
+              p.insert_html :bottom, "dashboard_main_table", :partial => "user_stories/us_for_show", :locals => {:user_story => @user_story, :count => (@user_story.sprint.user_stories.count + 1)}
+            end
+          end
         end
         flash[:notice] = 'UserStory was successfully created.'
       end
@@ -86,10 +92,19 @@ class UserStoriesController < ApplicationController
     
     if @user_story.update_attributes(params[:user_story])
       render :update do |p|
-        p.replace "tab_milestone_#{@user_story.id}", :partial => "user_stories/milestone_item", :locals => {:user_story => @user_story, :count => @user_story.milestone.user_stories.index(@user_story)} unless @user_story.milestone.nil?
+#        p.replace "tab_milestone_#{@user_story.id}", :partial => "user_stories/milestone_item", :locals => {:user_story => @user_story, :count => @user_story.milestone.user_stories.index(@user_story)} unless @user_story.milestone.nil?
         unless @user_story.sprint.nil?
-          p.replace "tab_us_#{@user_story.id}", :partial => "user_stories/sprint_item", :locals => {:user_story => @user_story, :count => @user_story.sprint.user_stories.index(@user_story)}
+          if params[:target].blank?
+            p.replace "tab_us_#{@user_story.id}", :partial => "user_stories/sprint_item", :locals => {:user_story => @user_story, :count => @user_story.sprint.user_stories.index(@user_story)}
+          else
+            if params[:target].eql? "show"
+              p.replace "tab_us_#{@user_story.id}", :partial => "user_stories/us_for_show", :locals => {:user_story => @user_story, :count => @user_story.sprint.user_stories.index(@user_story)}              
+            end
+          end
         else
+          unassigned_us = UserStory.find(:all, :conditions => ["version_id is null and project_id = ?", @project.id])
+          p.replace "tab_us_#{@user_story.id}", :partial => "user_stories/backlog_item", :locals => {:user_story => @user_story, :count => unassigned_us.size + 1}
+          p["tab_us_#{@user_story.id}"].visual_effect :highlight, :duration => 2
         end
       end
     else
@@ -109,7 +124,7 @@ class UserStoriesController < ApplicationController
     unless @user_story.sprint.nil?
       sprint_id = @user_story.sprint_id if @user_story.sprint.user_stories.size == 1
     else
-      unassigned_us = UserStory.find(:all, :conditions => ["sprint_id is null and project_id = ?", @project.id])
+      unassigned_us = UserStory.find(:all, :conditions => ["version_id is null and project_id = ?", @project.id])
       if unassigned_us.size == 1
         sprint_id = 0
       end
