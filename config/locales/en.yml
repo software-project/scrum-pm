@@ -1,0 +1,46 @@
+# English strings go here
+en:
+  label_dashboard: Dashboard
+  label_backlog: Backlog
+  backlog: Backlog
+  new_user_story: New user story
+  add_user_stories_are_assign: All user stories are assigned
+  user_story: User story
+  priority: Priority
+  ID: ID
+  estimation: Estimation
+  actions: Actions
+  new_sprint: New sprint
+  days: Days
+  ends_on: Ends on
+  points: Points
+  edit: Edit
+  delete: Delete
+  sprint_edit: Edit sprint
+  status: Status
+  id: ID
+  sprints: Sprints
+  done: Done
+  pending: Pending
+  in_progress: In progress
+  drag_user_story_here_to_assign_it_to_sprint: Drag user story here to assign it to sprint.
+  drag_user_story_here_to_assign_it_to_milestone: Drag user story here to assign it to milestone.
+  sprint_description: Sprint description
+  new_task: New task
+  destroy: Destroy
+  new: New
+  show: Show
+  choose: Choose
+  add: Add
+
+  user_story_edit: Edit user story
+  name: Name
+  description: Description
+  update: Update
+  add_task: Add task
+  stats: Statistics
+  total_story_points: Total story points
+  percent_done: Percent done
+  you_have_to_create_sprint_first: You have to create sprint first.
+  upload_a_diagram: Upload A Diagram
+  new_diagram: New diagram

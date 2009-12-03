@@ -2,6 +2,7 @@
 <div id="backlog-right">
   <div id="backlog-left">
     <div id="bl-left">
+      <p><%= image_tag(@chart.to_s) unless @chart.blank? %></p>
       <%= render(:partial => "shared/project_stats", :locals => {:project => @project}) %>
       <%= render(:partial => "sprints/product_backlog") %>
       <%#= render(:partial => "milestones/milestones") %>
@@ -39,9 +40,12 @@
   <%= stylesheet_link_tag 'scrum', :plugin => 'redmine_sprints' %>
   <%= stylesheet_link_tag 'spinbutton', :plugin => 'redmine_sprints' %>
   <%= javascript_include_tag 'spinbutton', :plugin => 'redmine_sprints' %>
-  <%= stylesheet_link_tag 'lightbox'%>
+  <%= stylesheet_link_tag 'lightbox'
+      flash[:notice] = 'Diagram was created successfully.', :plugin => 'redmine_sprints' %>
   <%= javascript_include_tag('calendar/calendar') %>
-  <%= javascript_include_tag("calendar/lang/calendar-#{current_language}.js") %>
+  <%= javascript_include_tag("calendar/lang/calendar-#{cur
+
+      rent_language}.js") %>
   <%= javascript_include_tag('calendar/calendar-setup') %>
   <%= stylesheet_link_tag('calendar') %>
 <% end %>

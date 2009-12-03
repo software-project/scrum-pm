@@ -1,6 +1,6 @@
 class IssueSprintsController < ApplicationController
   unloadable
-  before_filter :find_project
+  before_filter :find_project, :authorize
 
   
   # Add a new issue
@@ -30,8 +30,8 @@ class IssueSprintsController < ApplicationController
       return
     end
     @issue.status = default_status
-    @allowed_statuses = ([default_status] + default_status.find_new_statuses_allowed_to(User.current.role_for_project(@project), @issue.tracker)).uniq
-
+    @allowed_statuses = ([default_status] + default_status.find_new_statuses_allowed_to(User.current.roles_for_project(@project), @issue.tracker)).uniq
+    
     if request.get? || request.xhr?
       @issue.start_date ||= Date.today
     else
@@ -47,7 +47,8 @@ class IssueSprintsController < ApplicationController
         return
       end
     end
-    @priorities = Enumeration::get_values('IPRI')
+#    @priorities = Enumeration::get_values('IPRI')
+    @priorities = IssuePriority.all
     render :partial => "issue_sprints/new"
   end
 
@@ -90,7 +91,8 @@ class IssueSprintsController < ApplicationController
         p.insert_html :bottom, "tasks_#{status}_us_#{@issue.user_story_id}", :partial => "shared/task_view", :locals => {:task => @issue}
       end
     end
-    @priorities = Enumeration::get_values('IPRI')
+#    @priorities = Enumeration::get_values('IPRI')
+    @priorities = IssuePriority.all
   end
 
   def status_change

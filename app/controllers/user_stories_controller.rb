@@ -1,18 +1,7 @@
 class UserStoriesController < ApplicationController
   unloadable
-  before_filter :find_project, :only => [:index, :new, :create, :edit, :update, :destroy]
+  before_filter :find_project,:authorize, :only => [:new, :create, :edit, :update, :destroy]
   helper :sprints
-  
-  # GET /user_stories
-  # GET /user_stories.xml
-  def index
-    @user_stories = UserStory.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @user_stories }
-    end
-  end
 
   # GET /user_stories/1
   # GET /user_stories/1.xml

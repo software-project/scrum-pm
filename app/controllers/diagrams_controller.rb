@@ -27,7 +27,7 @@ class DiagramsController < ApplicationController
   def new
     @diagram = Diagram.new
     @diagram.user_story_id = params[:userstory_id]
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @diagram }
@@ -46,7 +46,7 @@ class DiagramsController < ApplicationController
     @diagram.project_id = @project_id
 
     if @diagram.save
-      flash[:notice] = 'Diagram was successfully created.'
+      flash[:notice] = 'Diagram was created successfully.'
       redirect_to url_for_object(@diagram.user_story.sprint,@project,"show")
     else
       render :action => :new
@@ -61,7 +61,7 @@ class DiagramsController < ApplicationController
 
     respond_to do |format|
       if @diagram.update_attributes(params[:diagram])
-        flash[:notice] = 'Diagram was successfully updated.'
+        flash[:notice] = 'Diagram was updated successfully.'
         format.html { redirect_to(@diagram) }
         format.xml  { head :ok }
       else

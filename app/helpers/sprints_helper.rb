@@ -120,6 +120,17 @@ module SprintsHelper
       options = options.merge({(parent.class.name.downcase + "_id").to_sym => parent.id})
     end
     link_to(image_tag("/plugin_assets/redmine_sprints/images/#{image}.png",:title => l("new")), options)
+  end             
+
+  def labelled_tabular_form_for(name, object, options, &proc)
+    options[:html] ||= {}
+    options[:html][:class] = 'tabular' unless options[:html].has_key?(:class)
+    form_for(name, object, options.merge({ :builder => TabularFormBuilder, :lang => current_language}), &proc)
   end
 
+  def labelled_tabular_remote_form_for(name, object, options, &proc)
+    options[:html] ||= {}
+    options[:html][:class] = 'tabular' unless options[:html].has_key?(:class)
+    remote_form_for(name, object, options.merge({ :builder => TabularFormBuilder, :lang => current_language}), &proc)
+  end
 end

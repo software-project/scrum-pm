@@ -15,7 +15,7 @@
       <th class="sortfirstdec">ID</th>
       <th><%= l('user_story') %></th>
       <th class="tab_backlog_header"><%= l('priority') %></th>
-      <th class="tab_backlog_header"><%= l('estiamtion') %></th>
+      <th class="tab_backlog_header"><%= l('estimation') %></th>
       <th class="tab_sprint_links nosort"><%= l('actions') %></th>
     </tr>
     <% unasssigned_us = UserStory.find(:all, :conditions => "version_id is null and project_id = #{@project.id}", :order => "priority ASC")  %>

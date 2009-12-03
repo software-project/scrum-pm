@@ -1,4 +1,4 @@
-<h1>Nowy diagram</h1>
+<h1><%= l('new_diagram') %></h1>
 
 <%= error_messages_for :diagram %>
 <% form_for @diagram, :url => {:action => "create", :project_id => @project.identifier},:html => { :multipart => true } do |f| -%>
@@ -6,15 +6,15 @@
   <%= f.hidden_field :user_story_id %>
   
   <p>
-    <%= f.label :nazwa %><br />
+    <%= f.label l('name') %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <label for="diagram">Upload A Diagram:</label><br/>
+    <label for="diagram"><%= l('upload_a_diagram') %>:</label><br/>
     <%= f.file_field :uploaded_data %>
   </p>
   <p>
-    <%= submit_tag 'Create' %>
+    <%= submit_tag l('create') %>
   </p>
 <% end -%>
 

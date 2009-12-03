@@ -3,19 +3,17 @@ class SprintsController < ApplicationController
   menu_item :backlog, :only => [:index]
   menu_item :dashboard, :only => [:show]
 
-  before_filter :find_project
+  before_filter :find_project, :authorize
   before_filter :find_sprint, :except => ["assign_us", 'new', 'create', 'index']
+  before_filter :burndown, :only => [:index, :show]
   
   
-  helper TasksHelper
-  helper CustomFieldsHelper
-  
-  
+#  helper TasksHelper
+  helper CustomFieldsHelper  
 
   # GET /sprints
   # GET /sprints.xml
   def index
-    @graph = open_flash_chart_object(265,200,"/projects/#{@project.identifier}/sprints/graph_code")
     @sprints = Version.find_all_by_project_id(@project.id, :order => 'effective_date DESC')
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +24,6 @@ class SprintsController < ApplicationController
   # GET /sprints/1
   # GET /sprints/1.xml
   def show
-#    @graph = open_flash_chart_object(265,200,"/projects/#{@project.identifier}/sprints/graph_code")
 
     unless @sprint.nil?
       session[:selected_sprint] = @sprint
@@ -36,8 +33,8 @@ class SprintsController < ApplicationController
         format.xml  { render :xml => @sprint }
       end
     else
-      flash[:notice] = "Musisz najpierw stworzyć iterację"
-      redirect_to("/projects/#{@project.identifier}/sprints/")
+      flash[:notice] = l('you_have_to_create_sprint_first')
+      redirect_to(:back)
     end
 
   end
@@ -167,68 +164,70 @@ class SprintsController < ApplicationController
         p.replace "no_milestone_"+milestone.id.to_s, "" if milestone.user_stories.size == 1
       end
     else
-      flash[:notice] = "Musisz najpierw stworzyć iterację"
+      flash[:notice] = l('you_have_to_create_sprint_first')
+      
       redirect_to("/projects/#{@project.identifier}/sprints/")
     end   
   end
 
-  def graph_code
-    tasklogs = TaskLog.find(:all, :conditions => ["version_id = :sprint and created_at <= :end and created_at >= :start",
-        {:sprint => @sprint.id,
-          :end => @sprint.start_date.advance(:days => @sprint.duration),
-          :start => @sprint.start_date }],
-          :order => "created_at ASC" )
-    data = []
-    fields = []
-    date = @sprint.start_date
-    time = date.to_time
-    time + ( 23 - time.hour).hours + (59 - time.min).minutes
-    date = time.to_date
-
-    count = 0
-    max = 0
-    while @sprint.duration > count
-      fields << date.strftime("%d.%m.%Y")
-      if date <= Date.new(Time.now.year,Time.now.month,Time.now.day)
-        data += [us_points_per_day(@sprint, tasklogs, date)]
-        max = data.last if data.last > max
-      else
-        zero = 0
-        data += [zero]
-      end
-      date = date.advance(:days => 1)
-      count += 1
-    end
-
-    title = Title.new("Burndown chart Sprint \##{@sprint.id}")
-    title.set_style('{font-size: 12px; color: #FFFFFF; font-weight: bold;}')
-    bar = BarGlass.new
-    bar.set_values(data)
-    bar.set_colour('#ff0000')
-    chart = OpenFlashChart.new
-    y_axis = YAxis.new
-    y_axis.set_range(0, max, (max/6).ceil)
-    y_axis.set_grid_colour('#333333')
-    y_axis.set_colour('#FFFFFF')
-    x_axis = XAxis.new
-    xlebels = XAxisLabels.new
-    labset = []
-    fields.each { |item|
-      xlabel = XAxisLabel.new(item, '#BBBBE3', 16, 'vertical')
-      xlabel.hide
-      labset << xlabel
-    }
-    xlebels.labels = labset
-    x_axis.labels = xlebels
-    x_axis.set_colours('#FFFFFF', '#333333')
-    chart.y_axis = y_axis
-    chart.x_axis = x_axis
-    chart.set_title(title)
-    chart.add_element(bar)
-    chart.bg_colour = '#333333'
-
-    render :text => chart.to_s
-  end
+# This will be replaced with burndown model 
+#  def graph_code
+#    tasklogs = TaskLog.find(:all, :conditions => ["version_id = :sprint and created_at <= :end and created_at >= :start",
+#        {:sprint => @sprint.id,
+#          :end => @sprint.start_date.advance(:days => @sprint.duration),
+#          :start => @sprint.start_date }],
+#          :order => "created_at ASC" )
+#    data = []
+#    fields = []
+#    date = @sprint.start_date
+#    time = date.to_time
+#    time + ( 23 - time.hour).hours + (59 - time.min).minutes
+#    date = time.to_date
+#
+#    count = 0
+#    max = 0
+#    while @sprint.duration > count
+#      fields << date.strftime("%d.%m.%Y")
+#      if date <= Date.new(Time.now.year,Time.now.month,Time.now.day)
+#        data += [us_points_per_day(@sprint, tasklogs, date)]
+#        max = data.last if data.last > max
+#      else
+#        zero = 0
+#        data += [zero]
+#      end
+#      date = date.advance(:days => 1)
+#      count += 1
+#    end
+#
+#    title = Title.new("Burndown chart Sprint \##{@sprint.id}")
+#    title.set_style('{font-size: 12px; color: #FFFFFF; font-weight: bold;}')
+#    bar = BarGlass.new
+#    bar.set_values(data)
+#    bar.set_colour('#ff0000')
+#    chart = OpenFlashChart.new
+#    y_axis = YAxis.new
+#    y_axis.set_range(0, max, (max/6).ceil)
+#    y_axis.set_grid_colour('#333333')
+#    y_axis.set_colour('#FFFFFF')
+#    x_axis = XAxis.new
+#    xlebels = XAxisLabels.new
+#    labset = []
+#    fields.each { |item|
+#      xlabel = XAxisLabel.new(item, '#BBBBE3', 16, 'vertical')
+#      xlabel.hide
+#      labset << xlabel
+#    }
+#    xlebels.labels = labset
+#    x_axis.labels = xlebels
+#    x_axis.set_colours('#FFFFFF', '#333333')
+#    chart.y_axis = y_axis
+#    chart.x_axis = x_axis
+#    chart.set_title(title)
+#    chart.add_element(bar)
+#    chart.bg_colour = '#333333'
+#
+#    render :text => chart.to_s
+#  end
 
   private
 
@@ -275,6 +274,15 @@ class SprintsController < ApplicationController
       else
         @sprint = find_current_sprint
       end
+    end
+  end
+
+  def burndown
+    if @sprint.blank?
+      @sprint = find_current_sprint      
+    end
+    unless @sprint.blank?
+      @chart = Burndown.new(@sprint)
     end
   end
 
