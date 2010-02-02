@@ -88,9 +88,11 @@
 
   map.with_options :controller => 'issue_sprints' do |issue_sprints|
     issue_sprints.with_options :conditions => {:method => :post} do |tasks|
-      issue_sprints.connect 'projects/:project_id/issue_sprints/new/:user_story_id/create', :action => 'create'
+      issue_sprints.connect 'projects/:project_id/issue_sprints/new/:user_story_id/new', :action => 'new'
       issue_sprints.connect 'projects/:project_id/issue_sprints/:task_id/status_change/:status_id/:user_story_id', :action => 'status_change'
     end
+    issue_sprints.with_options :conditions => {:method => :get} do |tasks|
+      issue_sprints.connect 'projects/:project_id/issue_sprints/new/:user_story_id', :controller => 'issue_sprints', :action => 'new'
+    end
   end
-  map.connect 'projects/:project_id/issue_sprints/new/:user_story_id', :controller => 'issue_sprints', :action => 'new'
 

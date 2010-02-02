@@ -2,7 +2,8 @@
 <div id="backlog-right">
   <div id="backlog-left">
     <div id="bl-left">
-      <p><%= image_tag(@chart.to_s) unless @chart.blank? %></p>
+      <%= print "----------------#{@chart.nil?.to_s}-----------------" %>
+      <p><%#= image_tag(@chart.to_s) unless @chart.blank? %></p>
       <%= render(:partial => "shared/project_stats", :locals => {:project => @project}) %>
       <%= render(:partial => "sprints/product_backlog") %>
       <%#= render(:partial => "milestones/milestones") %>
