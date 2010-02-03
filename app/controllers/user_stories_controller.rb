@@ -24,7 +24,6 @@ class UserStoriesController < ApplicationController
       sprint = Version.find(params[:sprint_id])
       unless sprint.nil?
         @user_story.version_id = sprint.id
-        session[:selected_sprint] = sprint
       end
     else
 
@@ -63,8 +62,7 @@ class UserStoriesController < ApplicationController
               p.insert_html :bottom, "dashboard_main_table", :partial => "user_stories/us_for_show", :locals => {:user_story => @user_story, :count => (@user_story.sprint.user_stories.count + 1)}
             end
           end
-        end
-        flash[:notice] = 'UserStory was successfully created.'
+        end        
       end
     else
       respond_to do |format|

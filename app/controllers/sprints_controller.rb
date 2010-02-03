@@ -24,16 +24,12 @@ class SprintsController < ApplicationController
   # GET /sprints/1
   # GET /sprints/1.xml
   def show
-
     unless @sprint.nil?
-      session[:selected_sprint] = @sprint
-
       respond_to do |format|
         format.html # show.html.erb
         format.xml  { render :xml => @sprint }
       end
     else
-      flash[:notice] = l('you_have_to_create_sprint_first')
       redirect_to(:back)
     end
 
@@ -164,8 +160,7 @@ class SprintsController < ApplicationController
         p.replace "no_milestone_"+milestone.id.to_s, "" if milestone.user_stories.size == 1
       end
     else
-      flash[:notice] = l('you_have_to_create_sprint_first')
-      
+
       redirect_to("/projects/#{@project.identifier}/sprints/")
     end   
   end
@@ -293,15 +288,15 @@ class SprintsController < ApplicationController
   end
 
   def find_current_sprint
-    sprint = Version.find(:first,
-      :conditions => ["project_id = ? and effective_date < ?", @project.id, Time.now],
-      :order => "effective_date desc")
-    if sprint.nil?
-      sprint = Version.find(:first,
+    @sprint = Version.find(:first,
+      :conditions => ["project_id = ? and effective_date > ?", @project.id, Time.now],
+      :order => "effective_date ASC")
+    if @sprint.nil?
+      @sprint = Version.find(:first,
         :conditions => ["project_id = ?", @project.id],
         :order => "effective_date desc")
     end
-    sprint
+    @sprint
   end
   
   def assign_to( user_story, params)
@@ -332,9 +327,9 @@ class SprintsController < ApplicationController
       end
     end
     if unsaved_issue_ids.empty?
-      flash[:notice] = l(:notice_successful_update) unless user_story.issues.empty?
+#      flash[:notice] = l(:notice_successful_update) unless user_story.issues.empty?
     else
-      flash[:error] = l(:notice_failed_to_save_issues, unsaved_issue_ids.size, user_story.issues.size, '#' + unsaved_issue_ids.join(', #'))
+#      flash[:error] = l(:notice_failed_to_save_issues, unsaved_issue_ids.size, user_story.issues.size, '#' + unsaved_issue_ids.join(', #'))
     end
   end
   

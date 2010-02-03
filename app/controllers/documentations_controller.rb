@@ -11,12 +11,10 @@ class DocumentationsController < ApplicationController
     @sprint_setup.project_id = @project.id
     respond_to do |format|
       if @sprint_setup.save
-        flash[:notice] = 'Sprint setup was successfully created.'
         scm_ctr = Sprints::ScmController.new(Repository.find_by_project_id(@project.id),@sprint_setup)
         begin
           scm_ctr.download
         rescue
-          flash[:notice] = "Error while creating project folders"
           @sprint_setup.destroy
           Dir.delete(scm_ctr.project_path)
         end
@@ -57,11 +55,10 @@ class DocumentationsController < ApplicationController
       scm_ctr = Sprints::ScmController.new(Repository.find_by_project_id(@project.id),@sprint_setup)
       scm_ctr.update
       respond_to do |format|
-        flash[:notice] = "Local repository was successfully updated"
+
         format.html { redirect_to :back }
       end
     else
-      flash[:notice] = "Sprint setup not found"
     end
   end
 

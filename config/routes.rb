@@ -1,3 +1,4 @@
+ActionController::Routing::Routes.draw do |map|
 
   # Agile PM members
   map.with_options :controller => 'user_stories' do |user_stories|
@@ -95,4 +96,6 @@
       issue_sprints.connect 'projects/:project_id/issue_sprints/new/:user_story_id', :controller => 'issue_sprints', :action => 'new'
     end
   end
+
+end
 

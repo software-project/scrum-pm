@@ -1,6 +1,6 @@
 <% if @issue.new_record? %>
 <p><%= f.select :tracker_id, @project.trackers.collect {|t| [t.name, t.id]}, :required => true %></p>
-<%= observe_field :issue_tracker_id, :url => { :action => :new, :project_id => @project, :user_story_id => @issue.user_story },
+<%= observe_field :issue_tracker_id, :url => { :action => :new, :project_id => @project, :user_story_id => @issue.user_story, :reload => true },
                                      :update => :new_issue_remote_form,
                                      :with => "Form.serialize('issue-form')" %>
 <% end %>
@@ -40,7 +40,6 @@
 <p><%= f.text_field :due_date, :size => 10 %><%= calendar_for('issue_due_date') %></p>
 <p><%= f.text_field :estimated_hours, :size => 3 %> <%= l(:field_hours) %></p>
 <p><%= f.select :done_ratio, ((0..10).to_a.collect {|r| ["#{r*10} %", r*10] }) %></p>
-  <%= f.hidden_field :user_story_id %>
 </div>
 
 <div style="clear:both;"> </div>

@@ -14,7 +14,7 @@ Redmine::Plugin.register :redmine_sprints do
   name 'Redmine Scrum Sprints plugin'
   author 'Software Project- Marcin Jedras'
   description 'This is Redmine plugin for scrum software development'
-  version '0.1.2'
+  version '0.1.3'
 
   project_module :sprints do
     permission :view_sprints, {:sprints => [:index, :show]}

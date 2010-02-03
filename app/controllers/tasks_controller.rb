@@ -58,7 +58,6 @@ class TasksController < ApplicationController
     if @task.save
       log_task(@task)
       redirect_to url_for_object(@task.user_story.sprint,@project,"show")
-      flash[:notice] = 'Task was successfully created.'
     else
       respond_to do |format|
         format.html { render :action => "new" }
@@ -105,7 +104,6 @@ class TasksController < ApplicationController
     if @task.update_attributes(params[:task])
       log_task(@task)
       redirect_to url_for_object(@task.user_story.sprint,@project,"show")
-      flash[:notice] = 'Task was successfully updated.'
     else
       respond_to do |format|
         format.html { render :action => "edit" }

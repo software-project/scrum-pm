@@ -17,6 +17,11 @@ class Burndown
   end
 
   def chart
+    html = ""
+    sprint_data.each{|i|
+       html << "-#{i}-"
+    }
+    print "----------------#{html}-----------------"
     Gchart.line(
       :size => '600x200',
       :data => data,
@@ -33,22 +38,35 @@ class Burndown
 
   def sprint_data
     @sprint_data ||= dates.map do |date|
-      user_stories = all_user_stories.select {|user_story| user_story.created_on.to_date <= date }
-      user_stories.inject(0) do |total_hours_left, user_story|
-# to trzeba przerobic na us zeby lecial dla kazdego issue       
-        done_ratio_details = issue.journals.map(&:details).flatten.select {|detail| 'done_ratio' == detail.prop_key }
-        details_today_or_earlier = done_ratio_details.select {|a| a.journal.created_on.to_date <= date }
-        last_done_ratio_change = details_today_or_earlier.sort_by {|a| a.journal.created_on }.last
 
-        ratio = if last_done_ratio_change
-          last_done_ratio_change.value
-        elsif done_ratio_details.size > 0
-          0
-        else
-          issue.done_ratio.to_i
+      total_points_left = 0
+      version.user_stories.each{|user_story|
+        if !user_story.is_done?(date)
+          total_points_left += user_story.story_points
         end
+        print "----------------#{user_story.is_done?(date)}-----------------"
+      }
+      total_points_left
 
-      end
+#      user_stories.inject(0) do |total_hours_left, user_story|
+#        if !user_story.is_done?(date)
+#          total_hours_left -= user_story.story_points
+#        else
+#          total_hours_left += 0
+#        end
+#      end
+
+#        done_ratio_details = issue.journals.map(&:details).flatten.select {|detail| 'done_ratio' == detail.prop_key }
+#        details_today_or_earlier = done_ratio_details.select {|a| a.journal.created_on.to_date <= date }
+#        last_done_ratio_change = details_today_or_earlier.sort_by {|a| a.journal.created_on }.last
+#
+#        ratio = if last_done_ratio_change
+#          last_done_ratio_change.value
+#        elsif done_ratio_details.size > 0
+#          0
+#        else
+#          issue.done_ratio.to_i
+#        end
     end
       
 #      issues = all_issues.select {|issue| issue.created_on.to_date <= date }
@@ -71,13 +89,8 @@ class Burndown
 #    end
   end
 
-  def ideal_data                                                                             er
-
+  def ideal_data
     [sprint_data.first, 0]
   end
 
-  def all_user_stories
-#    version.fixed_issues.find(:all, :include => [{:journals => :details}, :relations_from, :relations_to])
-    version.user_stories
-  end
 end

@@ -42,11 +42,6 @@ module SprintsHelper
       0
     end
   end
-  
-  def us_done?( user_story )
-    done_tasks = user_story.issues.find_all{|t| t.done_ratio == 100}.nitems
-    done_tasks == user_story.issues.nitems && done_tasks != 0 ? true: false
-  end
 
 
   def load_sprint_stats(sprint, data)
