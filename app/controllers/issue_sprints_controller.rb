@@ -3,6 +3,7 @@ class IssueSprintsController < ApplicationController
   before_filter :find_project, :authorize
 
   helper SprintsHelper
+  helper CustomFieldsHelper  
 
   
   # Add a new issue
