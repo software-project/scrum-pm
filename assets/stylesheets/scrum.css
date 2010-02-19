@@ -445,6 +445,13 @@ dt.user_story_task{
     padding: 4px;
 }
 
+.tab_us_diagrams .delete img{
+    background: transparent;
+    position: relative;
+    padding: 0;
+    left: -14px;
+}
+
 .tab_us_description{
     color: gray;
     height: 100px;

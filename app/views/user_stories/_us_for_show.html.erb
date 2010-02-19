@@ -19,7 +19,7 @@
               {:id => "edit_us", :title => l('user_story_edit'), :onclick => "Modalbox.show(this.href, {title: this.title, width: 370}); return false;"}
           %>
           <%= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/delete.png",:title => l('delete')),
-            :url => {:controller => :user_stories, :action => :destroy, :project_id => @project, :id => user_story.id},
+            :url => {:controller => :user_stories, :action => :destroy, :project_id => @project, :id => user_story.id, :confirm => 'Are you sure?', :method => :post},
             :confirm => l('Are you sure?')
           %>
         </td>
@@ -34,7 +34,10 @@
         <td colspan="2" class="tab_us_diagrams">
           <div>
           <% for diagram in user_story.diagrams %>
-            <%= lightbox_link_to image_tag(diagram.public_filename(:thumb)), diagram.public_filename %>
+            <%= link_to image_tag(diagram.public_filename(:thumb)), diagram.public_filename, :rel => "lightbox", :title => diagram.name %>
+            <span class="delete">
+                <%= link_to_object(diagram, "destroy", "delete") %>
+            </span>
           <% end %>
           </div>
         </td>

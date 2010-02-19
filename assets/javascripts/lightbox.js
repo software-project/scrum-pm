@@ -61,8 +61,8 @@
 //
 //	Configuration
 //
-var fileLoadingImage = "/images/loading.gif";		
-var fileBottomNavCloseImage = "/images/closelabel.gif";
+var fileLoadingImage = "/images/loading.gif";
+var fileBottomNavCloseImage = "/plugin_assets/redmine_sprints/images/closelabel.gif";
 
 var overlayOpacity = 0.8;	// controls transparency of shadow overlay
 

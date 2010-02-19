@@ -46,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
       sprints.connect 'projects/:project_id/sprints', :action => 'index'
       sprints.connect 'projects/:project_id/sprints/graph_code', :action => 'graph_code'
       sprints.connect 'projects/:project_id/sprints/new', :action => 'new'
-      sprints.connect 'projects/:project_id/sprints/:id', :action => 'show'
+      sprints.sprint 'projects/:project_id/sprints/:id', :action => 'show'
       sprints.connect 'projects/:project_id/sprints/:id/edit', :action => 'edit'
     end
     sprints.with_options :conditions => {:method => :post} do |sprints|
@@ -62,14 +62,14 @@ ActionController::Routing::Routes.draw do |map|
 
     map.with_options :controller => 'diagrams' do |diagrams|
     diagrams.with_options :conditions => {:method => :get} do |diagrams|
-      diagrams.connect 'projects/:project_id/diagrams', :action => 'index'
+#      diagrams.connect 'projects/:project_id/diagrams', :action => 'index'
       diagrams.connect 'projects/:project_id/diagrams/new/:userstory_id', :action => 'new'
-      diagrams.connect 'projects/:project_id/diagrams/:id', :action => 'show'
-      diagrams.connect 'projects/:project_id/diagrams/:id/edit', :action => 'edit'
+#      diagrams.connect 'projects/:project_id/diagrams/:id', :action => 'show'
+#      diagrams.connect 'projects/:project_id/diagrams/:id/edit', :action => 'edit'
     end
     diagrams.with_options :conditions => {:method => :post} do |diagrams|
       diagrams.connect 'projects/:project_id/diagrams', :action => 'create'
-      diagrams.connect 'projects/:project_id/diagrams/:id/:action', :action => /update|destroy/
+      diagrams.connect 'projects/:project_id/diagrams/:id/:action', :action => /destroy/#/update|destroy/
     end
   end
 

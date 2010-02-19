@@ -2,25 +2,25 @@ class DiagramsController < ApplicationController
   unloadable
   before_filter :find_project, :only => [:index, :new, :create, :show]
   
-  def index
-    @diagrams = Diagram.find(:all, :conditions => "thumbnail is null")
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @diagrams }
-    end
-  end
-
-  # GET /diagrams/1
-  # GET /diagrams/1.xml
-  def show
-    @diagram = Diagram.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @diagram }
-    end
-  end
+#  def index
+#    @diagrams = Diagram.find(:all, :conditions => "thumbnail is null")
+#
+#    respond_to do |format|
+#      format.html # index.html.erb
+#      format.xml  { render :xml => @diagrams }
+#    end
+#  end
+#
+#  # GET /diagrams/1
+#  # GET /diagrams/1.xml
+#  def show
+#    @diagram = Diagram.find(params[:id])
+#
+#    respond_to do |format|
+#      format.html # show.html.erb
+#      format.xml  { render :xml => @diagram }
+#    end
+#  end
 
   # GET /diagrams/new
   # GET /diagrams/new.xml
@@ -35,9 +35,9 @@ class DiagramsController < ApplicationController
   end
 
   # GET /diagrams/1/edit
-  def edit
-    @diagram = Diagram.find(params[:id])
-  end
+#  def edit
+#    @diagram = Diagram.find(params[:id])
+#  end
 
   # POST /diagrams
   # POST /diagrams.xml
@@ -46,7 +46,7 @@ class DiagramsController < ApplicationController
     @diagram.project_id = @project_id
 
     if @diagram.save
-      redirect_to url_for_object(@diagram.user_story.sprint,@project,"show")
+      redirect_to sprint_path(@diagram.user_story.sprint, @project.id)
     else
       render :action => :new
     end
@@ -55,30 +55,27 @@ class DiagramsController < ApplicationController
 
   # PUT /diagrams/1
   # PUT /diagrams/1.xml
-  def update
-    @diagram = Diagram.find(params[:id])
-
-    respond_to do |format|
-      if @diagram.update_attributes(params[:diagram])
-        format.html { redirect_to(@diagram) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @diagram.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /diagrams/1
-  # DELETE /diagrams/1.xml
+#  def update
+#    @diagram = Diagram.find(params[:id])
+#
+#    respond_to do |format|
+#      if @diagram.update_attributes(params[:diagram])
+#        format.html { redirect_to(@diagram) }
+#        format.xml  { head :ok }
+#      else
+#        format.html { render :action => "edit" }
+#        format.xml  { render :xml => @diagram.errors, :status => :unprocessable_entity }
+#      end
+#    end
+#  end
+#
+#  # DELETE /diagrams/1
+#  # DELETE /diagrams/1.xml
   def destroy
     @diagram = Diagram.find(params[:id])
     @diagram.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(diagrams_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to :back
   end
 
   private

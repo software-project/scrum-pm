@@ -2,9 +2,9 @@ pl:
   label_dashboard: Dashboard
   label_backlog: Backlog
   backlog: Backlog
-  new_user_story: Nowa historia u�ytkownika
-  add_user_stories_are_assign: Wszystkie historie u�ytkownik�w s� przypisane
-  user_story: Historia u�ytkownika
+  new_user_story: Nowa historia użytkownika
+  add_user_stories_are_assign: Wszystkie historie użytkowników są przypisane
+  user_story: Historia użytkownika
   priority: Priorytet
   ID: ID
   estimation: Estymacja
@@ -14,20 +14,21 @@ pl:
   ends_on: Koniec
   points: Punkty
   edit: Edycja
-  delete: Usu�
+  delete: Usuń
   sprint_edit: Edycja sprintu
   status: Status
   id: ID
   sprints: Sprinty
   done: Zrobione
-  pending: Oczekuj�cje
+  pending: Oczekującje
   in_progress: W trakcie wykonywania
-  drag_user_story_here_to_assign_it_to_sprint: Przeci�gnij histori� u�ytownika tutaj, aby przypisa� j� do sprintu.
-  drag_user_story_here_to_assign_it_to_milestone: Przeci�gnij histori� u�ytownika tutaj, aby przypisa� j� do kamienia milowego.
+  drag_user_story_here_to_assign_it_to_sprint: Przeciągnij historię użytownika tutaj, aby przypisać ją do sprintu.
+  drag_user_story_here_to_assign_it_to_milestone: Przeciągnij historię użytownika tutaj, aby przypisać ją do kamienia milowego.
   sprint_description: Opis sprintu
   new_task: Nowe zadanie
-  destroy: Usu�
+  destroy: Usuń
   new: Nowy
-  show: Poka�
+  show: Pokaż
   choose: Wybierz
-  add: Dodaj  
+  add: Dodaj
+  create: Stwórz

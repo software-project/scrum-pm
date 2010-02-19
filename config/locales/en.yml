@@ -32,6 +32,7 @@ en:
   show: Show
   choose: Choose
   add: Add
+  create: Create
 
   user_story_edit: Edit user story
   name: Name
