@@ -14,19 +14,19 @@
       <tr style="text-align: right;">
           <% data = load_project_stats(project) %>
           <td class="sprint_stats_total" >
-            <%= image_tag "/plugin_assets/redmine_sprints/images/sum.png", :alt => l("sum") %>
+            <%= image_tag "/plugin_assets/redmine_sprints/images/sum.png", :alt => l("sum"), :class => "sprint_stats_icon" %>
             <%= data[:all_points] %>
           </td>
           <td>
-            <%= image_tag "/plugin_assets/redmine_sprints/images/pending.png", :alt => l("pending") %>
+            <%= image_tag "/plugin_assets/redmine_sprints/images/pending.png", :alt => l("pending"), :class => "sprint_stats_icon" %>
             <%= data[:pending] %>
           </td>
           <td>
-            <%=  image_tag "/plugin_assets/redmine_sprints/images/inprogress.png", :alt => l("in_progress") %>
+            <%=  image_tag "/plugin_assets/redmine_sprints/images/inprogress.png", :alt => l("in_progress"), :class => "sprint_stats_icon" %>
             <%= data[:in_progress] %>
           </td>
           <td>
-            <%= image_tag "/plugin_assets/redmine_sprints/images/done.png", :alt => l("done") %>
+            <%= image_tag "/plugin_assets/redmine_sprints/images/done.png", :alt => l("done"), :class => "sprint_stats_icon" %>
             <%= data[:done] %>
           </td>
           <td class="sprint_stats_done">

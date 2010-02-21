@@ -247,6 +247,10 @@
     font-weight: bold;
 }
 
+.sprint_stats_icon {
+    vertical-align: top;
+}
+
 dt.user_story_task{
     background: transparent url(/plugin_assets/redmine_sprints/images/task_show.png) top left;
 
