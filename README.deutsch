@@ -30,7 +30,7 @@ Vorraussetzungen: googlechart plugin muss installiert sein
 	Sie beötigen git. Unter Debian zu installieren mit: apt-get install git-core
 	Die folgenden Schritte müssen im RAILS_ROOT von Redmine ausgeführt werden, zum Beispiel in /var/www/redmine
 
-	git clone git://github.com/software-project/scrum-pm.git vendor/plugin/redmine_sprints
+	git clone git://github.com/software-project/scrum-pm.git vendor/plugins/redmine_sprints
 
 2. Attachment_fu Plugin installieren
 

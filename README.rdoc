@@ -13,7 +13,7 @@ Some more interesting stuff planned:
 
 HOW TO INSTALL:
 1. Install plugin
- git clone git://github.com/software-project/scrum-pm.git vendor/plugin/redmine_sprints
+ git clone git://github.com/software-project/scrum-pm.git vendor/plugins/redmine_sprints
 2. Install Attachment_fu 
 git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu
 3. Install Googlechart gem
