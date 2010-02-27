@@ -36,7 +36,11 @@ Vorraussetzungen: googlechart plugin muss installiert sein
 
 	git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu
 
-3. Plugin Migration starten
+3. GChart gem installieren
+
+	gem install gchart
+
+4. Plugin Migration starten
 
 	rake db:migrate_plugins RAILS_ENV=production
 

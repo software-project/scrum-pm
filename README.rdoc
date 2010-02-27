@@ -16,6 +16,8 @@ HOW TO INSTALL:
  git clone git://github.com/software-project/scrum-pm.git vendor/plugin/redmine_sprints
 2. Install Attachment_fu 
 git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu
+3. Install GChart gem
+gem install gchart
 3. Run the usual  plugin migration
 rake db:migrate_plugins RAILS_ENV=production
 
