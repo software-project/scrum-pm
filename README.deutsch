@@ -36,9 +36,9 @@ Vorraussetzungen: googlechart plugin muss installiert sein
 
 	git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu
 
-3. Googlechart gem installieren
+3. Googlecharts gem installieren
 
-	sudo gem install googlechart
+	sudo gem install googlecharts
 
 4. Plugin Migration starten
 
