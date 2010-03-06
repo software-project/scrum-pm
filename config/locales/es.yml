@@ -1,0 +1,47 @@
+# Cadenas en español
+es:
+  label_dashboard: Dashboard
+  label_backlog: Backlog
+  backlog: Backlog
+  new_user_story: Nueva historia de usuario
+  add_user_stories_are_assign: Todas las historias de usuario han sido asignadas
+  user_story: Historia de usuario
+  priority: Prioridad
+  ID: ID
+  estimation: Estimación
+  actions: Acciones
+  new_sprint: Nuevo sprint
+  days: Días
+  ends_on: Finaliza el
+  points: Puntos
+  edit: Editar
+  delete: Borrar
+  sprint_edit: Editar sprint
+  status: Estado
+  id: ID
+  sprints: Sprints
+  done: Hecho
+  pending: Pendiente
+  in_progress: En progreso
+  drag_user_story_here_to_assign_it_to_sprint: Arrastrar una historia de usuario aquí para asignarla a un sprint.
+  drag_user_story_here_to_assign_it_to_milestone: Arrastrar una historia de usuario aquí para asignarla a un hito.
+  sprint_description: Descripción de Sprint
+  new_task: Nueva tarea
+  destroy: Eliminar
+  new: Nueva
+  show: Mostrar
+  choose: Seleccionar
+  add: Añadir
+  create: Crear
+
+  user_story_edit: Editar historia de usuario
+  name: Nombre
+  description: Descripción
+  update: Actualizar
+  add_task: Añadir tarea
+  stats: Estadísticas
+  total_story_points: Puntos totales de historia
+  percent_done: Porcentaje efectuado
+  you_have_to_create_sprint_first: Primero debe crear un sprint
+  upload_a_diagram: Subir un diagrama
+  new_diagram: Nuevo diagrama
