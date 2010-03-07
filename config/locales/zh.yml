@@ -1,0 +1,47 @@
+# English strings go here
+zh:
+  label_dashboard: 仪表版
+  label_backlog: 任务
+  backlog: 任务
+  new_user_story: 新增用户故事
+  add_user_stories_are_assign: 所有已指派的用户故事
+  user_story: 用户故事
+  priority: 优先级别
+  ID: ID
+  estimation: 时间评估
+  actions: 行动
+  new_sprint: 新增跌代
+  days: 天数
+  ends_on: 结束日期
+  points: 点数
+  edit: 修改
+  delete: 删除
+  sprint_edit: 修改跌代
+  status: 状态
+  id: ID
+  sprints: 跌代
+  done: 已完成
+  pending: 未解决
+  in_progress: 进行中
+  drag_user_story_here_to_assign_it_to_sprint: 将用户故事拖放于此以指派跌代。
+  drag_user_story_here_to_assign_it_to_milestone: 将用户故事拖放于此以指派里程碑。
+  sprint_description: 跌代描述
+  new_task: 新增任务
+  destroy: 销毁
+  new: 新建
+  show: 显示
+  choose: 选择
+  add: 增加
+  create: 建立
+
+  user_story_edit: 修改用户故事
+  name: 名称
+  description: 描述
+  update: 更新
+  add_task: 新增任务
+  stats: 统计
+  total_story_points: 总故事点数
+  percent_done: 完成率
+  you_have_to_create_sprint_first: 您必须先建立跌代。
+  upload_a_diagram: 上传一个图表
+  new_diagram: 新建图表
