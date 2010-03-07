@@ -526,6 +526,11 @@ dt.user_story_task{
     background-color: #ccffcc;
     border: 2px dashed orange;
 }
+.editable:hover{
+    cursor:pointer;
+    background-color: #ccffcc;
+    border: 2px dashed orange;
+}
 
 .unassigned_tasks{
     border-collapse:collapse;

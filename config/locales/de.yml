@@ -1,0 +1,46 @@
+# Deutsche Zeichenketten kommen hier hin
+de:
+  label_dashboard: Dashboard
+  label_backlog: Backlog
+  backlog: Backlog
+  new_user_story: Neue User Story
+  add_user_stories_are_assign: Alle User Stories wurden zugewiesen
+  user_story: User Story
+  priority: Priorität
+  ID: ID
+  estimation: Abschätzung
+  actions: Aktionen
+  new_sprint: Neuer sprint
+  days: Tage
+  ends_on: Endet am
+  points: Punkte
+  edit: Bearbeiten
+  delete: Löschen
+  sprint_edit: Sprint bearbeiten
+  status: Status
+  id: ID
+  sprints: Sprints
+  done: Fertig
+  pending: Schwebend
+  in_progress: In Bearbeitung
+  drag_user_story_here_to_assign_it_to_sprint: User Story hierhin ziehen (drag and drop) um sie dem sprint zuzuweisen.
+  drag_user_story_here_to_assign_it_to_milestone: Drag user story here to assign it to milestone.
+  sprint_description: Sprint Beschreibung
+  new_task: Neue Aufgabe
+  destroy: Zerstören
+  new: Neu
+  show: Anzeigen
+  choose: Auswählen
+  add: Hinzufügen
+  create: Hinzufügen
+
+  user_story_edit: User Story bearbeiten
+  name: Name
+  description: Beschreibung
+  update: Aktualisieren
+  add_task: Aufgabe hinzufügen
+  stats: Statistik
+  total_story_points: Gesamte Story Points
+  percent_done: Prozent erledigt
+  you_have_to_create_sprint_first: Sie müssen zuerst einen Sprint erstellen.
+  upload_a_diagram: Diagramm hochladen

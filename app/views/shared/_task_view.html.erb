@@ -14,7 +14,7 @@
   </tr>
 <tr>
     <td>
-      <p id="edit_user_<%= task.id %>" class="tab_us_align_top">
+      <p id="edit_user_<%= task.id %>" class="editable">
         <%= image_tag("/plugin_assets/redmine_sprints/images/user.png", :class => "middle") -%>
         <b><%= User.find(task.assigned_to_id).login unless task.assigned_to_id.nil? -%></b>
         <span style="display:none;">
@@ -26,7 +26,7 @@
         </span>
       </p>
     </td>
-    <td  id="edit_status_<%= task.id %>" style="text-align:right;" class="tab_us_align_top">
+    <td  id="edit_status_<%= task.id %>" style="text-align:right;" class="editable">
       <%= t("status") %>: <span><%= task.status.name %></span>
         <span style="display:none;">
           <%= collection_select :issue, "status_#{task.id}", issue_statuses, :id, :name,{ :selected => task.status.id},
