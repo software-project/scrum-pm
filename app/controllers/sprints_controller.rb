@@ -9,7 +9,9 @@ class SprintsController < ApplicationController
   
   
 #  helper TasksHelper
-  helper CustomFieldsHelper  
+  helper CustomFieldsHelper
+  helper SprintsHelper
+  include SprintsHelper
 
   # GET /sprints
   # GET /sprints.xml
@@ -25,6 +27,15 @@ class SprintsController < ApplicationController
   # GET /sprints/1.xml
   def show
     unless @sprint.nil?
+      @unassigned_tasks = Issue.find(:all,
+             :conditions => ["user_story_id IS NULL AND (fixed_version_id = ? || project_id = ?)", @sprint.id, @project.id ])
+      @issue_statuses = IssueStatus.find(:all)
+      @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
+
+      if defined? @sprint
+        @data = load_sprint_stats(@sprint,[])
+      end
+
       respond_to do |format|
         format.html # show.html.erb
         format.xml  { render :xml => @sprint }
@@ -34,7 +45,7 @@ class SprintsController < ApplicationController
     end
 
   end
-#
+
 #  # GET /sprints/new
 #  # GET /sprints/new.xml
   def new
@@ -48,17 +59,6 @@ class SprintsController < ApplicationController
       tmp_date = Time.now.advance(:days => 14)
       @sprint.effective_date = Date.new(tmp_date.year, tmp_date.month, tmp_date.day)
     end
-#    @sprint = Sprint.new
-#    sprint = Sprint.find_by_project_id(@project, :order => 'name DESC')
-#    if sprint
-#      @sprint.sprint_no = sprint.sprint_no + 1
-#      @sprint.start_date = sprint.start_date.advance(:days => sprint.duration)
-#      @sprint.duration = sprint.duration
-#    else
-#      @sprint.sprint_no = 1
-#      @sprint.start_date = Time.now
-#      @sprint.duration = 14
-#    end
     render :partial => "sprints/new"
   end
 #
@@ -164,65 +164,6 @@ class SprintsController < ApplicationController
       redirect_to("/projects/#{@project.identifier}/sprints/")
     end   
   end
-
-# This will be replaced with burndown model 
-#  def graph_code
-#    tasklogs = TaskLog.find(:all, :conditions => ["version_id = :sprint and created_at <= :end and created_at >= :start",
-#        {:sprint => @sprint.id,
-#          :end => @sprint.start_date.advance(:days => @sprint.duration),
-#          :start => @sprint.start_date }],
-#          :order => "created_at ASC" )
-#    data = []
-#    fields = []
-#    date = @sprint.start_date
-#    time = date.to_time
-#    time + ( 23 - time.hour).hours + (59 - time.min).minutes
-#    date = time.to_date
-#
-#    count = 0
-#    max = 0
-#    while @sprint.duration > count
-#      fields << date.strftime("%d.%m.%Y")
-#      if date <= Date.new(Time.now.year,Time.now.month,Time.now.day)
-#        data += [us_points_per_day(@sprint, tasklogs, date)]
-#        max = data.last if data.last > max
-#      else
-#        zero = 0
-#        data += [zero]
-#      end
-#      date = date.advance(:days => 1)
-#      count += 1
-#    end
-#
-#    title = Title.new("Burndown chart Sprint \##{@sprint.id}")
-#    title.set_style('{font-size: 12px; color: #FFFFFF; font-weight: bold;}')
-#    bar = BarGlass.new
-#    bar.set_values(data)
-#    bar.set_colour('#ff0000')
-#    chart = OpenFlashChart.new
-#    y_axis = YAxis.new
-#    y_axis.set_range(0, max, (max/6).ceil)
-#    y_axis.set_grid_colour('#333333')
-#    y_axis.set_colour('#FFFFFF')
-#    x_axis = XAxis.new
-#    xlebels = XAxisLabels.new
-#    labset = []
-#    fields.each { |item|
-#      xlabel = XAxisLabel.new(item, '#BBBBE3', 16, 'vertical')
-#      xlabel.hide
-#      labset << xlabel
-#    }
-#    xlebels.labels = labset
-#    x_axis.labels = xlebels
-#    x_axis.set_colours('#FFFFFF', '#333333')
-#    chart.y_axis = y_axis
-#    chart.x_axis = x_axis
-#    chart.set_title(title)
-#    chart.add_element(bar)
-#    chart.bg_colour = '#333333'
-#
-#    render :text => chart.to_s
-#  end
 
   private
 

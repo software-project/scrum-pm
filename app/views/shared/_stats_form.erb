@@ -1,39 +1,20 @@
 <div class="sprint_stats">
-<table>
-  <tr>
-    <th><%= l('total_points') %></th>
-    <%#*<th>Oczekujące</th>%>
-    <%#*<th>W trakcie wykonywania</th>%>
+<table class="unassigned_tasks">
+  <tr class="unassigned_tasks_hd">
+    <th><%= l('total_story_points') %></th>
     <th><%= l('done') %></th>
     <th><%= l('percent_done') %></th>
   </tr>
   <tr>
-    <% if defined? sprint %>
-      <% data = load_sprint_stats(sprint,[]) %>
-    <% else %>
-      <% data = load_project_stats(project) %>
-    <% end %>
       <td class="sprint_stats_total">
-        <%= data[:all_points] %>
-      </td>
-      <%#*<td>%>
-        <%#= data[:pending] %>
-      <%#*</td>%>
-      <%#*<td>%>
-        <%#= data[:in_progress] %>
-      <%#*</td>%>
-      <%#*<td>%>
-        <%#= data[:done] %>
-      <%#*</td>%>
-      <td class="sprint_stats_done">
-        <%= data[:us_points_done] %>
+        <%= @data[:all_points] %>
       </td>
       <td class="sprint_stats_done">
-        <%= data[:percent_done] %>
+        <%= @data[:done] %>
+      </td>
+      <td class="sprint_stats_done">
+        <%= @data[:percent_done] %>
       </td>
   </tr>
 </table>
-<br/>
-<script type="text/javascript" src="/javascripts/swfobject.js"></script>
-<%= @graph %>
 </div>

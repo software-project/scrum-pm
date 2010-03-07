@@ -43,7 +43,6 @@ module SprintsHelper
     end
   end
 
-
   def load_sprint_stats(sprint, data)
     if data.size == 0
       data = {:all_points => 0, :pending => 0, :in_progress => 0, :done => 0, :percent_done => 0 }
@@ -90,7 +89,7 @@ module SprintsHelper
     end
     data[:all_points] += data[:un_assign]
     data[:percent_done] = (data[:done]/(data[:all_points])) * 100 if data[:all_points] != 0
-    
+
     data
   end
 

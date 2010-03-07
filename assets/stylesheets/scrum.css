@@ -486,6 +486,24 @@ dt.user_story_task{
     min-height:70px;
 }
 
+.the_task_4{
+    background: #ffffcc;
+    border: 1px solid #666600;
+    min-height:70px;
+}
+
+.the_task_5{
+    background: #ffccff;
+    border: 1px solid #990099;
+    min-height:70px;
+}
+
+.the_task_6{
+    background: #ccccff;
+    border: 1px solid #000066;
+    min-height:70px;
+}
+
 .task_center{
     text-align: center;
     width: 100%;
@@ -508,3 +526,18 @@ dt.user_story_task{
     background-color: #ccffcc;
     border: 2px dashed orange;
 }
+
+.unassigned_tasks{
+    border-collapse:collapse;
+    border: 1px #CCCCCC solid;
+    width:100%;
+    margin: 10px 10px 0 0;
+}
+
+.unassigned_tasks_hd{
+    background: #9ca5fd;
+    padding:3px;
+    color: #48487b;
+    font-weight: bold;
+}
+

@@ -3,35 +3,38 @@
 <div class="<%= "the_task_#{task.status_id}" %>" >
 <table>
   <tr>
-    <td>
-      <% if task.status_id > 1 %>
-        <%#= link_to_remote "<", :controller => 'issue_sprints', :action => 'status_change', :project_id => @project.identifier, :task_id => task.id, :status_id => (task.status_id-1), :user_story_id => task.user_story_id %>
-        <%#*"/projects/#{@project.identifier}/tasks/#{task.id}/status_change/#{task.status_id-1}" %>
-      <% end %>
-    </td>
-    <td></td>
     <td class="task_center" colspan="2"><%= task.subject %></td>
-    <td class="task_right">
-      <% if task.status_id < 3 %>
-        <%#= link_to_remote ">", :controller => 'issue_sprints', :action => 'status_change', :project_id => @project.identifier, :task_id => task.id, :status_id => (task.status_id+1), :user_story_id => task.user_story_id %>
-        <%#= link_to ">", "/projects/#{@project.identifier}/tasks/#{task.id}/status_change/#{task.status_id+1}" %>
-      <% end %>
-    </td>
   </tr>
   <tr>
-    <td colspan="6">
+    <td colspan="2">
       <div class="task_description">
         <%= task.description %>
       </div>
     </td>
   </tr>
-  <tr>
-    <td colspan="3">
-      <p><%= image_tag("/plugin_assets/redmine_sprints/images/user.png", :class => "middle") -%><b><%= User.find(task.assigned_to_id).login unless task.assigned_to_id.nil? -%></b></p>
+<tr>
+    <td>
+      <p id="edit_user_<%= task.id %>" class="tab_us_align_top">
+        <%= image_tag("/plugin_assets/redmine_sprints/images/user.png", :class => "middle") -%>
+        <b><%= User.find(task.assigned_to_id).login unless task.assigned_to_id.nil? -%></b>
+        <span style="display:none;">
+          <%= collection_select :issue, "assign_to_#{task.id}", project_users, :id, :name,{ :include_blank => true, :selected => task.assigned_to_id},
+                                {:onChange => remote_function(:url => {:controller => :issue_sprints,
+                                                        :action => "update_task", :project_id => @project, :task_id => task.id,
+                                                        :field => "assigned_to_id", :model => "User"},
+                                                        :with => "'value=' + $('issue_assign_to_#{task.id}').value")} %>
+        </span>
+      </p>
     </td>
-    <td class="tab_us_links" colspan="4">
-      <%#= link_to_object(task, "edit", "task_edit") %>
-      <%#= link_to_object(task, "destroy", "task_delete") %>
+    <td  id="edit_status_<%= task.id %>" style="text-align:right;" class="tab_us_align_top">
+      <%= t("status") %>: <span><%= task.status.name %></span>
+        <span style="display:none;">
+          <%= collection_select :issue, "status_#{task.id}", issue_statuses, :id, :name,{ :selected => task.status.id},
+                                {:onChange => remote_function(:url => {:controller => :issue_sprints,
+                                                        :action => "update_task", :project_id => @project, :task_id => task.id,
+                                                        :field => "status_id", :model => "IssueStatus"},
+                                                        :with => "'value=' + $('issue_status_#{task.id}').value")} %>
+        </span>
     </td>
     <td></td>
   </tr>
@@ -40,3 +43,24 @@
 </div>
 </div>
 <%= draggable_element "task_#{task.id}".to_sym, :ghosting =>  false %>
+
+
+<script type="text/javascript">
+      $$('#edit_status_<%= task.id %> span:first-child').each(function(item){
+          item.observe('click', function(){
+              this.hide();
+              this.siblings().each(Element.show);
+          });
+      });
+      $('edit_user_<%= task.id %>').observe('click', function(){
+          this.childElements().each(function(item){
+              if(item.match('b')){
+                  item.hide();
+              }
+              if(item.match('span')){
+                  item.show();
+              }
+          });
+//          this.siblings().each(Element.show);
+      });
+</script>

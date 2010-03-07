@@ -46,11 +46,34 @@ class IssueSprintsController < ApplicationController
         status = done_ratio_to_status(@issue)
         attach_files(@issue, params[:attachments])
         call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
+        @issue_statuses = IssueStatus.find(:all)
+        @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
         render :update do |p|
-          p.insert_html :bottom, "tasks_#{status}_us_#{@issue.user_story_id}", :partial => "shared/task_view", :locals => {:task => @issue}
+          p.insert_html :bottom, "tasks_#{status}_us_#{@issue.user_story_id}", :partial => "shared/task_view",
+                        :locals => {:task => @issue, :issue_statuses => @issue_statuses,
+                        :project_users => @project_users}
         end
         return
       end
+    end
+  end
+
+  def update_task
+    obj = Object.const_get(params[:model])
+    value = nil
+    value = obj.find(params[:value]) unless params[:value].blank?
+    task = Issue.find(params[:task_id])
+    eval "task.#{params[:field]}=#{value ? value.id : "nil"}"
+    task.save!
+    @issue_statuses = IssueStatus.find(:all)
+    @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
+    status = done_ratio_to_status(task)
+
+    render :update do |page|
+      page.replace "task_wrap_#{task.id}", ""
+      page.insert_html :bottom, "tasks_#{ status }_us_#{task.user_story_id}", :partial => "shared/task_view",
+                        :locals => {:task => task, :issue_statuses => @issue_statuses,
+                        :project_users => @project_users}
     end
   end
 
@@ -64,13 +87,18 @@ class IssueSprintsController < ApplicationController
         if done_ratio_to_status(issue) != params[:status_id]
           issue.done_ratio = status_to_done_ratio(params[:status_id])
         end
+        issue.status = issue_status(issue)
         issue.user_story_id = params[:user_story_id]
         issue.author = User.current
       end
 
-      if issue.save
+      if issue.save                                     
+        @issue_statuses = IssueStatus.find(:all)
+        @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
         render :update do |p|
-          p.insert_html :bottom, "tasks_#{params[:status_id]}_us_#{issue.user_story_id}", :partial => "shared/task_view", :locals => {:task => issue}
+          p.insert_html :bottom, "tasks_#{params[:status_id]}_us_#{issue.user_story_id}", :partial => "shared/task_view",
+                        :locals => {:task => issue, :issue_statuses => @issue_statuses,
+                        :project_users => @project_users}
         end
       end
     end
@@ -82,6 +110,18 @@ class IssueSprintsController < ApplicationController
     @project = Project.find(params[:project_id])
     rescue ActiveRecord::RecordNotFound
       render_404
+  end
+
+  def issue_status(issue)
+
+    case issue.done_ratio
+    when 0
+      IssueStatus.find_by_name("New")
+    when 100
+      IssueStatus.find_by_name("Resolved")
+    else
+      IssueStatus.find_by_name("In Progress")
+    end
   end
 
   def done_ratio_to_status(issue)

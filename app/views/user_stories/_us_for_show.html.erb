@@ -60,17 +60,20 @@
     <td></td>
     <td class="tab_us_align_top" id="<%= "tasks_1_us_#{user_story.id}" %>">
     <% for task in user_story.issues.find_all{|t| t.done_ratio == 0} %>
-      <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
+      <%= render(:partial => "shared/task_view", :locals => {:task => task, :issue_statuses => @issue_statuses,
+                  :project_users => @project_users}) %>
     <% end %>
       </td>
       <td class="tab_us_align_top" id="<%= "tasks_2_us_#{user_story.id}" %>">
         <% for task in user_story.issues.find_all{|t| t.done_ratio > 0 && t.done_ratio < 100} %>
-          <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
+          <%= render(:partial => "shared/task_view", :locals => { :task => task, :issue_statuses => @issue_statuses,
+                  :project_users => @project_users }) %>
         <% end %>
       </td>
       <td class="tab_us_align_top" id="<%= "tasks_3_us_#{user_story.id}" %>">
         <% for task in user_story.issues.find_all{|t| t.done_ratio == 100} %>
-          <%= render(:partial => "shared/task_view", :locals => { :task => task }) %>
+          <%= render(:partial => "shared/task_view", :locals => { :task => task, :issue_statuses => @issue_statuses,
+                  :project_users => @project_users }) %>
         <% end %>
       </td>
       <%= drop_receiving_element("tasks_1_us_#{user_story.id}",

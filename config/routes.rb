@@ -91,6 +91,7 @@ ActionController::Routing::Routes.draw do |map|
     issue_sprints.with_options :conditions => {:method => :post} do |tasks|
       issue_sprints.connect 'projects/:project_id/issue_sprints/new/:user_story_id/new', :action => 'new'
       issue_sprints.connect 'projects/:project_id/issue_sprints/:task_id/status_change/:status_id/:user_story_id', :action => 'status_change'
+      issue_sprints.connect 'projects/:project_id/issue_sprints/:task_id/update_task/:field/:model/:value', :action => 'update_task'
     end
     issue_sprints.with_options :conditions => {:method => :get} do |tasks|
       issue_sprints.connect 'projects/:project_id/issue_sprints/new/:user_story_id', :controller => 'issue_sprints', :action => 'new'

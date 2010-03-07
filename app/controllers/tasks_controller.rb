@@ -79,7 +79,9 @@ class TasksController < ApplicationController
           log_task(task)
           render :update do |p|
 #           p.replace_html("task_wrap_#{task.id}", "")
-            p.insert_html :bottom, "tasks_#{task.status_id }_us_#{task.user_story_id}", :partial => "shared/task_view", :locals => {:task => task}
+            @issue_statuses = IssueStatus.find(:all)
+            p.insert_html :bottom, "tasks_#{task.status_id }_us_#{task.user_story_id}", :partial => "shared/task_view",
+                        :locals => {:task => @issue, :issue_statuses => @issue_statuses}
           end
         end
 #      end
