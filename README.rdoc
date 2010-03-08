@@ -12,13 +12,13 @@ Some more interesting stuff planned:
 
 
 HOW TO INSTALL:
-1. Install plugin 'git clone git://github.com/software-project/scrum-pm.git vendor/plugins/redmine_sprints'
-2. Install Attachment_fu 'git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu'
-3. Install Googlecharts gem 'sudo gem install googlecharts' (note. uninstall GCharts if insalled)
-4. Run the usual  plugin migration 'rake db:migrate_plugins RAILS_ENV=production'
+1. Install plugin `git clone git://github.com/software-project/scrum-pm.git vendor/plugins/redmine_sprints`
+2. Install Attachment_fu `git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu`
+3. Install Googlecharts gem `sudo gem install googlecharts` (note. uninstall GCharts if installed)
+4. Run the usual  plugin migration `rake db:migrate_plugins RAILS_ENV=production`
 
 
-Change log
+`Change log`
 
 0.1.4
 
