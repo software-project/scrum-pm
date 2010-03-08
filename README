@@ -1,0 +1,43 @@
+Scrum PM v. 0.1.4
+
+This version is compatibile with Redmine 0.9 stable. Previous versions may not work due to differences in new Issue form.
+
+Scrum PM is a plugin for Redmine for Scrum project management. Redmine Version class becomes a sprint and issue becomes task. Most actions support drag and drop, eg. dashboard where you can change status of your task simply by draging it to another column. 
+Some more interesting stuff planned:
+
+# Support for uml driagram generators railroad(Rails) and umlgraph (JAVA).
+# One click documentation generation (rdoc and javadoc)
+# Continous integration with cruisecontrol
+# Velocity planing
+
+
+HOW TO INSTALL:
+ 1. Install plugin `git clone git://github.com/software-project/scrum-pm.git vendor/plugins/redmine_sprints`
+ 2. Install Attachment_fu `git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu`
+ 3. Install Googlecharts gem `sudo gem install googlecharts` (note. uninstall GCharts if installed)
+ 4. Run the usual  plugin migration `rake db:migrate_plugins RAILS_ENV=production`
+
+Change log
+
+0.1.4
+
+# Added in place edititors for user assignment to issue, added unassigned issues assignment to user stories, added stats to dashboard, small clean up.
+
+0.1.3
+
+# Added burndown chart. User story is done when all dependent issues are done.
+
+0.1.2
+
+# Added compatibility with Redmine 0.9 stable
+
+0.1.1
+
+# Fixed issues with reassignment issues to version
+# Fixed most links(edit/delete/show)
+# Added status panel
+
+0.1.0
+
+# fixed sprint <=> user story assignment bug,
+# added proper i18n for english and polish
