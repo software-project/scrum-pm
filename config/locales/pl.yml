@@ -45,3 +45,4 @@ pl:
   upload_a_diagram: Wgraj diagram
   new_diagram: Nowy diagram
   unassigned_issues: Nieprzypisane zadania
+  error_changing_status: Błąd podczas zmiany statusu. Możesz nie mieć prawa do tej zmiany.

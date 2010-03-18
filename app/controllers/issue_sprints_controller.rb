@@ -96,9 +96,14 @@ class IssueSprintsController < ApplicationController
         @issue_statuses = IssueStatus.find(:all)
         @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
         render :update do |p|
+          p.replace "task_wrap_#{issue.id}", ""
           p.insert_html :bottom, "tasks_#{params[:status_id]}_us_#{issue.user_story_id}", :partial => "shared/task_view",
                         :locals => {:task => issue, :issue_statuses => @issue_statuses,
                         :project_users => @project_users}
+        end
+      else
+        render :update do |page|
+          page.insert_html :top, "content", content_tag('div', t(:error_changing_status), :class => "error", :id => "errorExplanation")
         end
       end
     end

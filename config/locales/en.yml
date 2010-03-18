@@ -46,3 +46,4 @@ en:
   upload_a_diagram: Upload A Diagram
   new_diagram: New diagram
   unassigned_issues: Unassigned issues
+  error_changing_status: Error while changing status. You may not have persmissions.
