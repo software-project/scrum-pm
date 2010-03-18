@@ -64,16 +64,21 @@ class IssueSprintsController < ApplicationController
     value = obj.find(params[:value]) unless params[:value].blank?
     task = Issue.find(params[:task_id])
     eval "task.#{params[:field]}=#{value ? value.id : "nil"}"
-    task.save!
-    @issue_statuses = IssueStatus.find(:all)
-    @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
-    status = done_ratio_to_status(task)
+    if task.save
+      @issue_statuses = IssueStatus.find(:all)
+      @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
+      status = done_ratio_to_status(task)
 
-    render :update do |page|
-      page.replace "task_wrap_#{task.id}", ""
-      page.insert_html :bottom, "tasks_#{ status }_us_#{task.user_story_id}", :partial => "shared/task_view",
-                        :locals => {:task => task, :issue_statuses => @issue_statuses,
-                        :project_users => @project_users}
+      render :update do |page|
+        page.replace "task_wrap_#{task.id}", ""
+        page.insert_html :bottom, "tasks_#{ status }_us_#{task.user_story_id}", :partial => "shared/task_view",
+                          :locals => {:task => task, :issue_statuses => @issue_statuses,
+                          :project_users => @project_users}
+      end
+    else           
+      render :update do |page|
+        page.insert_html :top, "content", content_tag('div', t(:error_changing_status), :class => "error", :id => "errorExplanation")
+      end
     end
   end
 
