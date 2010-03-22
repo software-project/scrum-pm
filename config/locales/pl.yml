@@ -46,3 +46,4 @@ pl:
   new_diagram: Nowy diagram
   unassigned_issues: Nieprzypisane zadania
   error_changing_status: Błąd podczas zmiany statusu. Możesz nie mieć prawa do tej zmiany.
+  error_while_adding_sprint: Błąd podczas dodawania Sprintu. Pole data jest wymagane.

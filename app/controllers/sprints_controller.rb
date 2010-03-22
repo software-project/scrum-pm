@@ -72,16 +72,15 @@ class SprintsController < ApplicationController
 #  # POST /sprints.xml
   def create
   	@sprint = @project.versions.build(params[:sprint])
-#    @sprint = Sprint.new(params[:sprint])
-#    @sprint.project_id = @project.id
     if @sprint.save
       render :update do |p|
         p.insert_html :top, 'sprints_fieldset_main', :partial => "sprints/sprint", :locals => {:sprint => @sprint}
         p["sprint_frame_cont_#{@sprint.id}"].visual_effect :blind_down, :duration => 1
       end
     else
-      format.html { render :action => "new" }
-      format.xml  { render :xml => @sprint.errors, :status => :unprocessable_entity }
+      render :update do |page|
+        page.insert_html :top, "content", content_tag('div', t(:error_while_adding_sprint), :class => "error", :id => "errorExplanation")
+      end
     end
   end
 

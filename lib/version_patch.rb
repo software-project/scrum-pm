@@ -7,6 +7,7 @@ module VersionPatch
       unloadable
       
       has_many :user_stories, :class_name => 'UserStory', :foreign_key => 'version_id'
+      validates_presence_of :effective_date
     end
   end
 end
