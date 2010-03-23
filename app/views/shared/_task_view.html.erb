@@ -18,22 +18,22 @@
         <%= image_tag("/plugin_assets/redmine_sprints/images/user.png", :class => "middle") -%>
         <b><%= User.find(task.assigned_to_id).login unless task.assigned_to_id.nil? -%></b>
         <span style="display:none;">
-          <%= collection_select :issue, "assign_to_#{task.id}", project_users, :id, :name,{ :include_blank => true, :selected => task.assigned_to_id},
+          <%= select :user, :id, project_users.collect{|u|[u.name, u.id]},{:id => "issue_assign_to_#{task.id}", :include_blank => true, :selected => task.assigned_to_id},
                                 {:onChange => remote_function(:url => {:controller => :issue_sprints,
                                                         :action => "update_task", :project_id => @project, :task_id => task.id,
                                                         :field => "assigned_to_id", :model => "User"},
-                                                        :with => "'value=' + $('issue_assign_to_#{task.id}').value")} %>
+                                                        :with => "'value=' + this.value")} %>
         </span>
       </p>
     </td>
     <td  id="edit_status_<%= task.id %>" style="text-align:right;" class="editable">
       <%= t("status") %>: <span><%= task.status.name %></span>
         <span style="display:none;">
-          <%= collection_select :issue, "status_#{task.id}", issue_statuses, :id, :name,{ :selected => task.status.id},
+          <%= select :issue_status, :id, issue_statuses.collect{|s|[s.name, s.id]}, { :selected => task.status.id},
                                 {:onChange => remote_function(:url => {:controller => :issue_sprints,
                                                         :action => "update_task", :project_id => @project, :task_id => task.id,
                                                         :field => "status_id", :model => "IssueStatus"},
-                                                        :with => "'value=' + $('issue_status_#{task.id}').value")} %>
+                                                        :with => "'value=' + this.value")} %>
         </span>
     </td>
     <td></td>
