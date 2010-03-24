@@ -126,11 +126,11 @@ class IssueSprintsController < ApplicationController
 
     case issue.done_ratio
     when 0
-      IssueStatus.find_by_name("New")
+      IssueStatus.find_by_position(1)
     when 100
-      IssueStatus.find_by_name("Resolved")
+      IssueStatus.find_by_position(3)
     else
-      IssueStatus.find_by_name("In Progress")
+      IssueStatus.find_by_position(2)
     end
   end
 
@@ -146,6 +146,7 @@ class IssueSprintsController < ApplicationController
   end
 
   def status_to_done_ratio(status)
+
     case status
     when "1"
       0
