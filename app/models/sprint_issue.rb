@@ -1,4 +1,5 @@
 class SprintIssue < Issue
+  unloadable
   belongs_to :user_story, :class_name => 'UserStory', :foreign_key => 'user_story_id'
 
   def validate
