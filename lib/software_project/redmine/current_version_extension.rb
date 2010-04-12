@@ -3,6 +3,7 @@ module SoftwareProject
     module VersionExtension
       def self.included(base)
         base.class_eval do
+          unloadable
           has_many :user_stories, :class_name => 'UserStory', :foreign_key => 'version_id'
         end
       end
@@ -11,6 +12,7 @@ module SoftwareProject
     module IssueExtension
       def self.included(base)
         base.class_eval do
+          unloadable
           belongs_to :user_story, :class_name => 'UserStory', :foreign_key => 'user_story_id'
         end
       end
