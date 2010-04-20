@@ -48,3 +48,4 @@ en:
   unassigned_issues: Unassigned issues
   error_changing_status: Error while changing status. You may not have persmissions.
   error_while_adding_sprint: Error while adding Sprint. Field Date is required.
+  field_user_story: Field User Story

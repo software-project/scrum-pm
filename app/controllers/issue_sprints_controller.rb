@@ -94,7 +94,6 @@ class IssueSprintsController < ApplicationController
         end
         issue.status = issue_status(issue)
         issue.user_story_id = params[:user_story_id]
-        issue.author = User.current
       end
 
       if issue.save                                     
