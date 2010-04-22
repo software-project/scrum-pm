@@ -1,4 +1,3 @@
-
 <%# form_for :sprint, :url => '/sprints/show', :method => :get do |select_form| %>
 
 <p><%= image_tag(@chart.chart(960,150)) unless @chart.blank? %></p>
@@ -79,12 +78,14 @@
         </td>
       </tr>
     <% @unassigned_tasks.each do |task| %>
+      <% if task.fixed_version.id == @sprint.id then %>
       <tr>
         <td>
           <%= render :partial => "shared/task_view", :locals => {:task => task, :issue_statuses => @issue_statuses,
                   :project_users => @project_users} %>
         </td>
       </tr>
+      <% end %>
     <% end %>
     </table>
 
