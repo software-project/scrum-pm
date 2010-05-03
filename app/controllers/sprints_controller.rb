@@ -28,7 +28,7 @@ class SprintsController < ApplicationController
   def show
     unless @sprint.nil?
       @unassigned_tasks = Issue.find(:all, :joins => :status,
-             :conditions => ["issue_statuses.is_closed = 0 AND user_story_id IS NULL AND (fixed_version_id = ? OR project_id = ?)", @sprint.id, @project.id ])
+             :conditions => ["issue_statuses.is_closed = ? AND user_story_id IS NULL AND (fixed_version_id = ? OR project_id = ?)", false, @sprint.id, @project.id ])
       @issue_statuses = IssueStatus.find(:all)
       @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
 
