@@ -1,0 +1,49 @@
+pt-BR:
+  label_dashboard: Dashboard
+  label_backlog: Backlog
+  backlog: Backlog
+  new_user_story: Nova estória
+  add_user_stories_are_assign: Todas as estórias estão alocadas
+  user_story: Estória
+  priority: Prioridade
+  ID: ID
+  estimation: Estimativa
+  actions: Ações
+  new_sprint: Novo sprint
+  days: Dias
+  ends_on: Termina em
+  points: Pontos
+  edit: Editar
+  delete: Excluir
+  sprint_edit: Editar sprint
+  status: Status
+  id: ID
+  sprints: Sprints
+  done: Finalizado
+  pending: Pendente
+  in_progress: Em progresso
+  drag_user_story_here_to_assign_it_to_sprint: Arraste as estórias aqui para atribuir ao sprint.
+  drag_user_story_here_to_assign_it_to_milestone: Arraste as estórias aqui para atribuir ao milestone.
+  sprint_description: Descrição do sprint
+  new_task: Nova tarefa
+  destroy: Excluir
+  new: Novo
+  show: Exibir
+  choose: Escolher
+  add: Adicionar
+  create: Criar
+
+  user_story_edit: Editar estória
+  name: Nome
+  description: Descrição
+  update: Atualizar
+  add_task: Adicionar tarefa
+  stats: Estatísticas
+  total_story_points: Pontuação total das estórias
+  percent_done: Percentual finalizado
+  you_have_to_create_sprint_first: Você precisa criar o sprint primeiro.
+  upload_a_diagram: Upload de um diagrama
+  new_diagram: Novo diagrama
+  unassigned_issues: Tarefas não atribuídas
+  error_changing_status: Erro ao alterar status. talvez você não tenha permissão.
+  error_while_adding_sprint: Erro ao adicionar Sprint. Campo Data é requerido.
