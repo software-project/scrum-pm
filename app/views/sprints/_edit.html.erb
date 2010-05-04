@@ -1,5 +1,5 @@
 <% labelled_tabular_remote_form_for :sprint, @sprint,
-  :url => {:controller => "sprints", :action => "update", :project_id => @project.identifier},
+  :url => {:controller => "sprints", :action => "update", :project_id => @project.identifier, :id => @sprint.id},
   :html => {:method => :post, :multipart => true, :id => 'sprint-form'} do |f| %>
 
     <%= render(:partial => "sprints/form", :locals => {:f => f}) %>
