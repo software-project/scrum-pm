@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller => 'tasks' do |tasks|
     tasks.with_options :conditions => {:method => :get} do |tasks|
       tasks.connect 'projects/:project_id/tasks', :action => 'index'
+      tasks.connect 'projects/:project_id/tasks/issues', :action => 'issues'
       tasks.connect 'projects/:project_id/tasks/new/:userstory_id', :action => 'new'
       tasks.connect 'projects/:project_id/tasks/:id', :action => 'show'
       tasks.connect 'projects/:project_id/tasks/:id/edit', :action => 'edit'
@@ -25,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
     end
     tasks.with_options :conditions => {:method => :post} do |tasks|
       tasks.connect 'projects/:project_id/tasks', :action => 'new'
+      tasks.connect 'projects/:project_id/tasks/issues', :action => 'issues'
       tasks.connect 'projects/:project_id/tasks/:task_id/status_change/:status_id/:user_story_id', :action => 'status_change'
       tasks.connect 'projects/:project_id/tasks/:task_id/status_change/:status_id', :action => 'status_change'
       tasks.connect 'projects/:project_id/tasks/:id/:action', :action => /update|destroy/

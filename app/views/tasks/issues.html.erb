@@ -1,0 +1,60 @@
+<% form_tag({ :controller => 'queries', :action => 'new' }, :id => 'query_form') do %>
+    <%= hidden_field_tag('project_id', @project.to_param) if @project %>
+		<div id="query_form_content">
+    <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+    	<legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+    	<div style="<%= @query.new_record? ? "" : "display: none;" %>">
+    		<%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+    	</div>
+    </fieldset>
+    <fieldset class="collapsible collapsed">
+    	<legend onclick="toggleFieldset(this);"><%= l(:label_options) %></legend>
+    	<div style="display: none;">
+    		<table>
+    			<tr>
+    				<td><%= l(:field_column_names) %></td>
+						<td><%= render :partial => 'queries/columns', :locals => {:query => @query} %></td>
+					</tr>
+					<tr>
+						<td><%= l(:field_group_by) %></td>
+						<td><%= select_tag('group_by', options_for_select([[]] + @query.groupable_columns.collect {|c| [c.caption, c.name.to_s]}, @query.group_by)) %></td>
+					</tr>
+				</table>
+			</div>
+		</fieldset>
+		</div>
+    <p class="buttons">
+
+    <%= link_to_remote l(:button_apply), 
+                       { :url => { :set_filter => 1 },
+                         :update => "unassigned_tasks",
+                         :with => "Form.serialize('query_form')"
+                       }, :class => 'icon icon-checked' %>
+                       
+    <%= link_to_remote l(:button_clear),
+                       { :url => { :set_filter => 1, :project_id => @project },
+                         :method => :get,
+                         :update => "unassigned_tasks",
+                       }, :class => 'icon icon-reload'  %>
+                       
+    </p>
+<% end %>
+
+<%= error_messages_for 'query' %>
+<% if @query.valid? %>
+<% if @issues.empty? %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+<table >
+<% @issues.each do |task| %>
+<tr>
+<td>
+  <%= render :partial => "shared/task_view", :locals => {:task => task, :issue_statuses => @issue_statuses,
+	  :project_users => @project_users} %>
+</td>
+</tr>
+<% end %>
+</table>
+<p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
+<% end %>
+<% end %>

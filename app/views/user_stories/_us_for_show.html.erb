@@ -10,8 +10,8 @@
     <table>
       <tr >
         <td><div class="tab_sprint_user_story">#<%= user_story.us_number %></div></td>
-        <td class="tab_us_name"><%=h user_story.name %></td>
-        <td class="tab_us_links">
+        <td class="tab_us_name"><%=h user_story.name %>(P<%= user_story.priority %>)</td>
+          <td class="tab_us_links">
           <!--This will be done at some point-->
           <%#= link_to_object(user_story, "show", "story") %>
           <%= link_to image_tag("/plugin_assets/redmine_sprints/images/story_edit.png"),
@@ -30,6 +30,7 @@
         </td>
 
       </tr>
+      <!--
       <tr>
         <td colspan="2" class="tab_us_diagrams">
           <div>
@@ -54,6 +55,7 @@
           <%= link_to_new_object("diagram",user_story,"diagram_add") %>
         </td>
       </tr>
+      -->
     </table>
     <%= image_tag("/plugin_assets/redmine_sprints/images/us-bottom.png") %>
     </td>

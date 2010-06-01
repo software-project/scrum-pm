@@ -27,14 +27,11 @@ class SprintsController < ApplicationController
   # GET /sprints/1.xml
   def show
     unless @sprint.nil?
-      @unassigned_tasks = Issue.find(:all, :joins => :status,
-             :conditions => ["issue_statuses.is_closed = ? AND user_story_id IS NULL AND (fixed_version_id = ? OR project_id = ?)", false, @sprint.id, @project.id ])
-      @issue_statuses = IssueStatus.find(:all)
-      @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
-
       if defined? @sprint
         @data = load_sprint_stats(@sprint,[])
       end
+      @issue_statuses = IssueStatus.find(:all)
+      @project_users = User.find(:all, :joins => :members, :conditions => ["members.project_id = ?", @project.id])
 
       respond_to do |format|
         format.html # show.html.erb
