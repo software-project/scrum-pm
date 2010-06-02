@@ -4,14 +4,7 @@
 <table>
   <tr>
     <td class="task_center" colspan="2">
-      <%= link_to task.subject, :controller => "issues", :action => "show", :id => task.id %>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <div class="task_description">
-        <%= task.description %>
-      </div>
+      <%= link_to task.subject, {:controller => "issues", :action => "show", :id => task.id}, :title => task.description %>
     </td>
   </tr>
 <tr>
