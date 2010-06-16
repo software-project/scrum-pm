@@ -109,7 +109,7 @@ class UserStoriesController < ApplicationController
     @user_story = UserStory.find(params[:id])
     user_story_id = @user_story.id
     unless @user_story.sprint.nil?
-      sprint_id = @user_story.sprint_id if @user_story.sprint.user_stories.size == 1
+      sprint_id = @user_story.version_id if @user_story.sprint.user_stories.size == 1
     else
       unassigned_us = UserStory.find(:all, :conditions => ["version_id is null and project_id = ?", @project.id])
       if unassigned_us.size == 1
