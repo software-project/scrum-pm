@@ -14,11 +14,11 @@ class CreateTimeEstimates < ActiveRecord::Migration
     TimeEstimate.create :estimation => "3", :value => 3
     TimeEstimate.create :estimation => "5", :value => 5
     TimeEstimate.create :estimation => "8", :value => 8
-    TimeEstimate.create :estimation => "14", :value => 14
-    TimeEstimate.create :estimation => "20", :value => 20
-    TimeEstimate.create :estimation => "50", :value => 50
-    TimeEstimate.create :estimation => "80", :value => 80
-    TimeEstimate.create :estimation => "100", :value => 100
+    TimeEstimate.create :estimation => "13", :value => 13
+    TimeEstimate.create :estimation => "21", :value => 21
+    TimeEstimate.create :estimation => "34", :value => 34
+    TimeEstimate.create :estimation => "55", :value => 55
+    TimeEstimate.create :estimation => "89", :value => 89
   end
 
   def self.down
