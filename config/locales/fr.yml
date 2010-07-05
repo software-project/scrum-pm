@@ -1,0 +1,50 @@
+fr:
+  label_dashboard: Tableau de bord
+  label_backlog: Backlog
+  backlog: Backlog
+  new_user_story: Nouveau user story
+  add_user_stories_are_assign: Tous les user stories sont assignés
+  user_story: User story
+  priority: Priorité
+  ID: Identifiant
+  estimation: Estimation
+  actions: Actions
+  new_sprint: Nouveau sprint
+  days: Jours
+  ends_on: Fini le
+  points: Points
+  edit: Editer
+  delete: Supprimer
+  sprint_edit: Editer sprint
+  status: Statut
+  id: Identifiant
+  sprints: Sprints
+  done: Fait
+  pending: En attente
+  in_progress: En cours
+  drag_user_story_here_to_assign_it_to_sprint: "Déplacer l'user story ici pour l'assigner au sprint."
+  drag_user_story_here_to_assign_it_to_milestone: "Déplacer l'user story ici pour l'assigner au jalon."
+  sprint_description: Description Sprint
+  new_task: Nouvelle Tâche
+  destroy: Détruire
+  new: Nouveau
+  show: Montrer
+  choose: Choisir
+  add: Ajouter
+  create: Créer
+
+  user_story_edit: Editer user story
+  name: Nom
+  description: Description
+  update: Mettre à jour
+  add_task: Ajouter tâche
+  stats: Statistiques
+  total_story_points: Total des points story
+  percent_done: Pourcentage réalisé
+  you_have_to_create_sprint_first: "Vous devez d'abord créer le sprint."
+  upload_a_diagram: Charger un Diagramme
+  new_diagram: Nouveau diagramme
+  unassigned_issues: Demandes non assignées
+  error_changing_status: Error while changing status. You may not have persmissions.
+  error_while_adding_sprint: "Erreur durant changement de statut. Vous n'avez peut-être pas les permissions."
+  field_user_story: Champ User Story
