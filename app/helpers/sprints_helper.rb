@@ -81,7 +81,7 @@ module SprintsHelper
 
   def load_project_stats(project)
     data = {:all_points => 0, :pending => 0, :in_progress => 0, :done => 0, :percent_done => 0, :un_assign => 0 }
-    UserStory.find(:all, :conditions => ["version_id is null"]).each { |i|
+    UserStory.find(:all, :conditions => ["version_id is null AND project_id = ?",project.id]).each { |i|
       data[:un_assign] += i.time_estimate.value
     }
     for sprint in Version.find(:all, :conditions => ["project_id = ?",project.id])

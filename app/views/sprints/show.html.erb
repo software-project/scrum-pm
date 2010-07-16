@@ -74,22 +74,70 @@
     <table class="unassigned_tasks">
       <tr class="unassigned_tasks_hd">
         <td>
-          <%= t("unassigned_issues") %>
+          <%= t("label_issue_plural") %>
         </td>
       </tr>
-    <% @unassigned_tasks.each do |task| %>
-      <% if task.fixed_version.id == @sprint.id then %>
-      <tr>
-        <td>
-          <%= render :partial => "shared/task_view", :locals => {:task => task, :issue_statuses => @issue_statuses,
-                  :project_users => @project_users} %>
-        </td>
-      </tr>
-      <% end %>
-    <% end %>
+<script type="text/javascript">
+//<![CDATA[
+function add_filter() {
+    select = $('add_filter_select');
+    field = select.value
+    Element.show('tr_' +  field);
+    check_box = $('cb_' + field);
+    check_box.checked = true;
+    toggle_filter(field);
+    select.selectedIndex = 0;
+    
+    for (i=0; i<select.options.length; i++) {
+        if (select.options[i].value == field) {
+            select.options[i].disabled = true;
+        }    
+    }
+}
+
+function toggle_filter(field) {
+    check_box = $('cb_' + field);
+    
+    if (check_box.checked) {
+        Element.show("operators_" + field);
+        toggle_operator(field);
+    } else {
+        Element.hide("operators_" + field);
+        Element.hide("div_values_" + field);
+  }
+}
+
+function toggle_operator(field) {
+  operator = $("operators_" + field);
+  switch (operator.value) {
+    case "!*":
+    case "*":
+    case "t":
+    case "w":
+    case "o":
+    case "c":
+      Element.hide("div_values_" + field);
+      break;
+    default:
+      Element.show("div_values_" + field);
+      break;
+  }
+}
+
+function toggle_multi_select(field) {
+    select = $('values_' + field);
+    if (select.multiple == true) {
+        select.multiple = false;
+    } else {
+        select.multiple = true;
+    }
+}
+//]]>
+</script>
+      <script><%= remote_function(:url => {:controller => :tasks, :action => :issues},:update => 'unassigned_tasks', :layout => false) %></script>
     </table>
-
-
+    <div class="unassigned_tasks" id="unassigned_tasks" style="width:900px">
+    </div>
     <%= render(:partial => "shared/stats_form", :locals => {:sprint => @sprint}) %>
 <% end %>
 
@@ -112,3 +160,12 @@
   <%= stylesheet_link_tag('calendar') %>
   <%= stylesheet_link_tag 'scm' %>
 <% end %>
+
+<%= drop_receiving_element("unassigned_tasks",
+:accept => "us_task",
+:before => visual_effect(:highlight, "unassigned_tasks"),
+:success => "element.remove();",
+:with   => "'task_id=' + (element.id.split('_').last())",
+:hoverclass => 'hover',
+:url    => {:controller => :issue_sprints, :action => :status_delete, :project_id => @project }
+)%>

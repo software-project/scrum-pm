@@ -113,6 +113,26 @@ class IssueSprintsController < ApplicationController
     end
   end
 
+  def status_delete
+    issue = Issue.find(params[:task_id])
+
+    if !issue.user_story_id.nil? && User.current.allowed_to?(:edit_issues, @project)
+      journal = issue.init_journal(User.current, nil)
+
+      if !issue.nil? 
+        issue.user_story_id = nil 
+      end
+
+      if issue.save                                     
+      else
+        render :update do |page|
+          page.insert_html :top, "content", content_tag('div', t(:error_changing_status), :class => "error", :id => "errorExplanation")
+        end
+      end
+    end
+    render :text => nil
+  end
+
   private
 
   def find_project
