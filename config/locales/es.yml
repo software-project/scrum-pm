@@ -45,3 +45,8 @@ es:
   you_have_to_create_sprint_first: Primero debe crear un sprint
   upload_a_diagram: Subir un diagrama
   new_diagram: Nuevo diagrama
+  unassigned_issues: Asuntos no asignados
+  error_changing_status: Error modificando el estado. Es posible que no tenga el permiso necesario.
+  error_while_adding_sprint: Error añadiendo Sprint. El campo 'Fecha' es obligatorio.
+  field_user_story: Campo de historia de usuario
+
