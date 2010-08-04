@@ -144,12 +144,16 @@ class IssueSprintsController < ApplicationController
   def issue_status(issue)
 
     case issue.done_ratio
-    when 0
-      IssueStatus.find_by_position(1)
-    when 100
-      IssueStatus.find_by_position(3)
-    else
-      IssueStatus.find_by_position(2)
+      when 0
+        if issue.status_id.nil? || !issue.status_id.nil? && issue.status.position == 3
+          IssueStatus.find_by_position(1)
+        else
+          issue.status
+        end                   
+      when 100
+        IssueStatus.find_by_position(3)
+      else
+        IssueStatus.find_by_position(2)
     end
   end
 
