@@ -10,6 +10,11 @@
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
+
+#sidebar {
+	overflow: hidden;
+}	
+
 div.calendar{
 	z-index:10001 !important;
 }
@@ -48,7 +53,7 @@ div.calendar{
     border: 1px solid #48487b;
     margin: 10px 0;
     padding: 0;
-}
+
 
 .sprints_fieldset td{
     padding: 2px;
@@ -234,6 +239,14 @@ div.calendar{
 
 .sprint_stats td{
     text-align: center;
+}
+
+td.tab_us_main {
+	width: 234px;
+}
+
+td.tab_us_main table {
+	background-color: #99ccff;
 }
 
 .sprint_stats_done{
@@ -542,6 +555,9 @@ dt.user_story_task{
     border: 1px #CCCCCC solid;
     width:100%;
     margin: 10px 10px 0 0;
+    overflow: hidden;
+    table-layout: fixed;
+    word-wrap: break-word;
 }
 
 .unassigned_tasks_hd{

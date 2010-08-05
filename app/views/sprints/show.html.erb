@@ -27,7 +27,7 @@
             :onclick => "Modalbox.show(this.href, {title: this.title, width: 700}); return false;"}
           %>
           <%= link_to_object(@sprint, "destroy", "delete") %>
-
+          <%= link_to_new_object("user_story", @sprint, "story_add") %>
         </td>
       </tr>
       <tr >
@@ -136,7 +136,7 @@ function toggle_multi_select(field) {
 </script>
       <script><%= remote_function(:url => {:controller => :tasks, :action => :issues},:update => 'unassigned_tasks', :layout => false) %></script>
     </table>
-    <div class="unassigned_tasks" id="unassigned_tasks" style="width:900px">
+    <div class="unassigned_tasks" id="unassigned_tasks">
     </div>
     <%= render(:partial => "shared/stats_form", :locals => {:sprint => @sprint}) %>
 <% end %>
