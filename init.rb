@@ -4,6 +4,7 @@ require 'form_helper_extensions'
 require 'version_patch'
 require 'issue_patch'
 require 'gchart'
+require "mini_magick"
 
 Dispatcher.to_prepare do
   Version.send( :include, VersionPatch )
