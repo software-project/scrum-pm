@@ -27,7 +27,7 @@
             :onclick => "Modalbox.show(this.href, {title: this.title, width: 700}); return false;"}
           %>
           <%= link_to_object(@sprint, "destroy", "delete") %>
-
+          <%= link_to_new_object("user_story", @sprint, "story_add") %>
         </td>
       </tr>
       <tr >
