@@ -5,6 +5,7 @@ require 'version_patch'
 require 'issue_patch'
 require 'gchart'
 require "mini_magick"
+require "hooks"
 
 Dispatcher.to_prepare do
   Version.send( :include, VersionPatch )
@@ -15,7 +16,7 @@ Redmine::Plugin.register :redmine_sprints do
   name 'Redmine Scrum Sprints plugin'
   author 'Software Project- Marcin Jedras'
   description 'This is Redmine plugin for scrum software development'
-  version '0.1.5'
+  version '0.1.6'
 
   project_module :sprints do
     permission :view_sprints, {:sprints => [:index, :show]}

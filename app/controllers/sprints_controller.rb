@@ -6,6 +6,7 @@ class SprintsController < ApplicationController
   before_filter :find_project, :authorize
   before_filter :find_sprint, :except => ["assign_us", 'new', 'create', 'index']
   before_filter :burndown, :only => [:index, :show]
+  before_filter :check_if_redirected, :only =>[:show]
   
   
 #  helper TasksHelper
@@ -279,6 +280,14 @@ class SprintsController < ApplicationController
     # Make sure updated_on is updated when adding a note.
     issue.updated_on_will_change!
     @current_journal
+  end
+
+  def check_if_redirected
+    if params[:task_id]
+      issue = Issue.find(params[:task_id])
+      issue.redirect_to = nil
+      issue.save!
+    end
   end
 
 end

@@ -6,7 +6,15 @@
         :onclick => "Modalbox.show(this.href, {title: this.title, width: 900, height: 500}); return false;",
         :style => "float:right;padding:3px;"
         } %>
+
+      <%#= link_to_remote image_tag("/plugin_assets/redmine_sprints/images/task_add.png")+" "+l('add_task'),
+        :url => {:controller => 'issues',:action => 'new', :project_id => @project, :user_story_id => user_story.id},
+          :complete => "Modalbox.show($('hidden_item'), {title: this.title, width: 900, height: 500}); return false;",
+        :update => "hidden_item",
+        :id => "new_us", :title => l('new_task'),
+        :style => "float:right;padding:3px;" %>
       <%= image_tag("/plugin_assets/redmine_sprints/images/us-top.png") %>
+
     <table>
       <tr >
         <td><div class="tab_sprint_user_story">#<%= user_story.us_number %></div></td>
