@@ -48,9 +48,9 @@ ActionController::Routing::Routes.draw do |map|
       sprints.connect 'projects/:project_id/sprints', :action => 'index'
       sprints.connect 'projects/:project_id/sprints/graph_code', :action => 'graph_code'
       sprints.connect 'projects/:project_id/sprints/new', :action => 'new'
-      sprints.sprint 'projects/:project_id/sprints/:id', :action => 'show'
-      sprints.connect 'projects/:project_id/sprints/:id/:task_id', :action => 'show'
+      sprints.connect 'projects/:project_id/sprints/:id', :action => 'show'
       sprints.connect 'projects/:project_id/sprints/:id/edit', :action => 'edit'
+      sprints.connect 'projects/:project_id/sprints/:id/:task_id', :action => 'show'
     end
     sprints.with_options :conditions => {:method => :post} do |sprints|
       sprints.connect 'projects/:project_id/sprints/:sprint/:us/assign_us', :action => 'assign_us'
